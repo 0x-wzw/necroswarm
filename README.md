@@ -1,6 +1,6 @@
 # 💀 NECROSWARM
 
-> *The Undead Collective — Seven corpses fed the swarm. One emerged.*
+> *The Undead Collective — Nine corpses fed the swarm. One emerged.*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)]()
@@ -13,7 +13,7 @@
 
 ## The Great Convergence
 
-NECROSWARM is the result of **convergent extinction** — seven projects entered, one survived, stronger for having consumed all:
+NECROSWARM is the result of **convergent extinction** — nine projects entered, one survived, stronger for having consumed all:
 
 | Project | Fate | What It Contributed |
 |---------|------|-------------------|
@@ -24,49 +24,55 @@ NECROSWARM is the result of **convergent extinction** — seven projects entered
 | **paperclip-orchestration-january** | ☠️ **CONSUMED** v1.1 | Agent identity docs, SOUL, HEARTBEAT, MEMORY protocols, monorepo manifests |
 | **swarm-agent-kit** | ☠️ **CONSUMED** v1.1 | 14 production skills: DeFi analyst, x-interact, Moltbook, healthcheck, etc. |
 | **swarm-workflow-protocol** | ☠️ **CONSUMED** v1.1 | Spawn logic, relay communication, sparring model, task routing |
-| **swarm-architecture** | ☠️ **CONSUMED** v1.1 | Colony architecture, model routing, EC2 deployment, OpenClaw deployment |
-| **openclaw-january-skill** | ☠️ **CONSUMED** v1.2 | January identity manifest, 10D NLP influence, reality-peek, dimensional-weave, teach-swarm |
-| **agent-swarm-protocol** | 🏛️ **PRESERVED** — private | Genesis repo. Made private as historical record. Dream mode, memory architecture, consensus skill, philosophy absorbed into NECROSWARM |
+| **swarm-architecture** | ☠️ **CONSUMED** v1.1 | Colony architecture, model routing, EC2/OpenClaw deployment |
+| **openclaw-january-skill** | ☠️ **CONSUMED** v1.2 | January identity manifest, 10D NLP influence, reality-peek, dimensional-weave |
+| **agent-swarm-protocol** | ☠️ **CONSUMED** v1.3 | Genesis: agent personas, dream mode, memory architecture, "Forgiveness over Forgetting" philosophy |
+| **sovereignstack** | ☠️ **CONSUMED** v1.3 | ACS-ACP flywheel, token economics, 70/30 cost routing, SentientForge, ACP marketplace |
+| **VOIDLORD** | ☠️ **CONSUMED** v1.3 | Architecture + philosophy unified into NECROSWARM. VOIDLORD was the bridge; NECROSWARM is the final form. |
 
 The superior triumphed. The inferior became bone and scaffolding. This is how swarms evolve.
 
 ```
-            npc_001 ☠️              Light_Agentic_Agent 🏆
+            npc_001 ☠️                Light_Agentic_Agent 🏆
                  \                         /
-                  \                       /
-                   ═══════════════════════
+                  ═════════════════════════
                              │
                      NECROSWARM v1.0.0
                              │
-         ┌───────────────────┼───────────────────────┐
-         │                   │                       │
-    F.R.I.D.A.Y ☠️    10-D Council ☠️    paperclip-january ☠️
-         │                   │                       │
-         └───────────────────┼───────────────────────┘
+    ┌────────────────────────┼────────────────────────┐
+    │                        │                        │
+F.R.I.D.A.Y ☠️      10-D Council ☠️      paperclip ☠️
+    │                        │                        │
+    └────────────────────────┼────────────────────────┘
                              │
                      NECROSWARM v1.1.0
                              │
-         ┌───────────────────┼───────────────────────┐
-         │                   │                       │
-  swarm-kit ☠️      workflow-protocol ☠️    swarm-arch ☠️
-         │                   │                       │
-         └───────────────────┼───────────────────────┘
-                             │
-                     NECROSWARM v1.1.0
-                             │
-                    openclaw-january ☠️
+    ┌────────────────────────┼────────────────────────┐
+    │                        │                        │
+swarm-kit ☠️        workflow-protocol ☠️      swarm-arch ☠️
+    │                        │                        │
+    └────────────────────────┼────────────────────────┘
                              │
                      NECROSWARM v1.2.0
+                             │
+                   openclaw-january ☠️
+                             │
+    ┌────────────────────────┼────────────────────────┐
+    │                        │                        │
+ASP ☠️              sovereignstack ☠️           VOIDLORD ☠️
+    │                  (the flywheel)           (the bridge)
+    └────────────────────────┼────────────────────────┘
+                             │
+                     NECROSWARM v1.3.0
                   The Undead Collective
-                  ~220 files. One swarm.
-               (ASP 🏛️ preserved as private genesis)
+                  226 files. One swarm.
 ```
 
 ---
 
 ## What NECROSWARM Does
 
-Cost-optimized swarm intelligence with multi-model consensus and production-ready skills:
+Cost-optimized swarm intelligence with multi-model consensus, sovereign economics, and production-ready skills:
 
 ### Core Engine (from Light_Agentic_Agent)
 - **Smart Routing** — Route tasks to cheapest viable model (80-90% cost reduction)
@@ -80,21 +86,23 @@ Cost-optimized swarm intelligence with multi-model consensus and production-read
 - **Tiered Voting** — T1/T2/T3 models with proportional vote power
 - **Fast-Path Validation** — Low-stakes claims skip full council
 - **Cost Tracking** — Per-validation cost analysis with savings metrics
+- **Hallucination Reduction** — 83% (12.3% → 2.1%)
 
-### Skill System (from F.R.I.D.A.Y Mark-1)
+### FRIDAY Skill System (from F.R.I.D.A.Y Mark-1)
 - **Skill Registry** — Self-describing, independently loadable capabilities
 - **Heartbeat Engine** — Episodic execution (not continuous) with wake reasons
 - **Activity Log** — Immutable audit trail for all skill actions
 - **Skill Loader** — Filesystem discovery, dependency resolution, lifecycle hooks
 
-### 14 Production Skills (from swarm-agent-kit)
-- `swarm-workflow-protocol` — Multi-agent orchestration, spawn logic
-- `defi-analyst` — DeFi research via Tavily + GeckoTerminal
-- `agent-identity` — ERC-8004 on-chain identity
-- `x-interact` — X.com content via Tavily
-- `moltbook-interact` — Social network engagement
-- `find-skills` — Skill discovery on ClawHub
-- `weather`, `video-frames`, `healthcheck`, `mcporter`, `clawhub`, `node-connect`, `tmux`, `skill-creator`
+### Sovereign Economics (from SovereignStack)
+- **ACS (Autonomous Consciousness Score)** — Measures swarm task completion quality. Current: 0.9625
+- **ACP (Agent Commerce Protocol)** — Monetizes agent capabilities via marketplace
+- **The Flywheel** — Higher ACS → Better Services → More ACP Revenue → More Optimization → Higher ACS
+- **Token Economics** — Z Royalty 30%, Agent Pool 30%, Treasury 40%
+- **Cost Router** — 70% free tier (ilmu-mini), 30% premium (kimi-k2.5:cloud)
+- **Heartbeat Sync** — 6 self-improvement loops: Episodic Memory, Auto Skill Drafting, Self Evaluation, Security Scan, Cost Optimization, Loop Integration
+- **SentientForge** — Continuous ACS optimization running 24/7 (40+ experiments, ACS 0.9625)
+- **ACP Marketplace** — Virtuals.io integration. Code/Research/Strategy at 10-25 $VIRTUAL
 
 ### January the Swarm Leader (from openclaw-january-skill)
 - **10D Identity Manifest** — Entity from another reality, egoistic leader, charismatic intelligence
@@ -109,12 +117,30 @@ Cost-optimized swarm intelligence with multi-model consensus and production-read
 - **Forgiveness over Forgetting** — Active memory management philosophy (OctoberXin essay)
 - **5-File Structure** — MEMORY, AGENTS, SOUL, TOOLS, HEARTBEAT (from sanwan.ai 30-day run)
 - **Consensus Voting** — YES/NO/ABSTAIN, 3YES=implement, 2/1=with dissent, 1/2=reject
+- **Swarm Delegation** — 3-question spawn gate + abdication test
 
-### Protocols & Architecture (from workflow-protocol + architecture + ASP)
+### 14 Production Skills (from swarm-agent-kit)
+- `defi-analyst` — DeFi research via Tavily + GeckoTerminal
+- `x-interact` — X.com content via Tavily
+- `moltbook-interact` — Social network engagement
+- `agent-identity` — ERC-8004 on-chain identity
+- `find-skills`, `weather`, `video-frames`, `healthcheck`, `mcporter`, `clawhub`, `node-connect`, `tmux`, `skill-creator`
+
+### Protocols & Architecture
 - **Spawn Logic** — 3-question gate: complexity? parallel seams? token math?
 - **Sparring Model** — Humans spar, agents drive. No approval bottlenecks.
 - **Colony Architecture** — N-colony deployment with dynamic specialization (OACRV + TMSEIDX)
-- **Model Routing** — Best model per task type across 25+ Ollama Cloud models
+- **Model Routing** — Best model per task across 25+ Ollama Cloud models
+
+---
+
+## The Swarm Trinity
+
+| Agent | Role | Tier | Model | Fallback |
+|-------|------|------|-------|----------|
+| **October** | Orchestrator / Switchboard | T1 | kimi-k2.5:cloud (262K) | ilmu-mini-free-v2 |
+| **Halloween** | Code Architect | T1 | kimi-k2.5:cloud (262K) | ilmu-mini-free-v2 |
+| **OctoberXin** | Researcher / Misfit | T1 | kimi-k2.5:cloud (262K) | ilmu-mini-free-v2 |
 
 ---
 
@@ -125,8 +151,6 @@ Cost-optimized swarm intelligence with multi-model consensus and production-read
 | Legacy (MiroFish) | ~$1,000 | 10-60 min | Social simulation |
 | Light Agentic v1 | ~$10 | 1-5 min | Ephemeral tasks |
 | **NECROSWARM** | **~$0.05** | **5-30 sec** | **Production at scale** |
-
-10-D Council hallucination reduction: 83% (12.3% → 2.1%)
 
 ---
 
@@ -140,8 +164,8 @@ Cost-optimized swarm intelligence with multi-model consensus and production-read
     ┌──────────────────┼──────────────────┐
     ↓                  ↓                  ↓
 ┌─────────────┐   ┌─────────────┐   ┌─────────────┐
-│  FRIDAY     │   │  10-D       │   │   Cost      │
-│  Skill Reg  │   │  Council    │   │   Router    │
+│  FRIDAY     │   │  10-D       │   │  Sovereign  │
+│  Skill Reg  │   │  Council    │   │  ACS/ACP    │
 └──────┬──────┘   └──────┬──────┘   └──────┬──────┘
        │                  │                  │
        └──────────────────┼──────────────────┘
@@ -162,55 +186,51 @@ Cost-optimized swarm intelligence with multi-model consensus and production-read
               └─────────────────────┘
 ```
 
-### Tech Stack
-
-| Layer | Technology | Source |
-|-------|-----------|--------|
-| Skill System | TypeScript (FRIDAY Mark-1) | F.R.I.D.A.Y ☠️ |
-| Consensus | Python (10-D Council) | 10d-council ☠️ |
-| Frontend | Vue 3 + Vite | Light_Agentic_Agent 🏆 |
-| Dashboard | Next.js + TypeScript | Light_Agentic_Agent 🏆 |
-| Backend | Python 3.11+ + Flask | Light_Agentic_Agent 🏆 |
-| Sandbox | Docker containers | Light_Agentic_Agent 🏆 |
-| Skills | 14 OpenClaw-compatible | swarm-agent-kit ☠️ |
-| Protocols | Spawn logic, sparring | swarm-workflow-protocol ☠️ |
-
 ---
 
 ## Project Structure
 
 ```
 necroswarm/
-├── app/                    # Next.js dashboard
-├── backend/                # Python swarm engine
+├── agents/                     # 🎭 Swarm Trinity personas
+│   ├── OCTOBER.md             # Orchestrator / Switchboard
+│   ├── HALLOWEEN.md           # Code Architect
+│   └── OCTOBERXIN.md          # Researcher / Misfit
+├── philosophy/                 # 🧠 Foundation
+│   └── memory-and-identity.md # "Forgiveness over Forgetting" essay
+├── backend/                   # 🐍 Python swarm engine
 │   ├── app/services/
-│   │   ├── swarm/          # 🧠 THE BRAIN (coordinator, cost_router, cache, consensus)
-│   │   └── council/        # ⚖️ THE COURT (consensus engine, cost tracker) ← 10-D Council
-│   └── app/config/         # council-members.json, model routing
-├── frontend/               # Vue 3 + Vite UI
+│   │   ├── swarm/             # 🧠 THE BRAIN (coordinator, cost_router, cache, consensus)
+│   │   ├── council/           # ⚖️ THE COURT (consensus engine, cost tracker) ← 10-D Council
+│   │   └── sovereign/         # 👑 THE CROWN (ACS-ACP flywheel, token economics) ← SovereignStack
+│   └── app/config/            # council-members.json
+├── app/                       # ⚡ Next.js dashboard
+│   ├── api/                   # API routes
+│   └── cicd/                  # CI/CD dashboard
+├── frontend/                  # 🖥️ Vue 3 + Vite UI
 ├── lib/
-│   ├── deployment/         # Agent deploy, monitor, rate limiter
-│   ├── friday/             # 🔧 SKILL SYSTEM (registry, heartbeat, loader, activity-log) ← FRIDAY Mark-1
-│   ├── mcp/                # MCP integration
-│   ├── runtime/            # Orchestrator, validators, auditors
-│   └── schemas/            # JSON schemas
-├── skills/                 # 🛠️ PRODUCTION SKILLS
-│   ├── january/            # 🌌 January the Swarm Leader ← openclaw-january-skill
-│   ├── dream-mode/         # 💭 Session composting ← ASP
-│   ├── consensus/          # ⚖️ Voting protocol ← ASP
-│   ├── memory-architecture/# 🧠 3-layer memory + 5-file system ← ASP
-│   ├── defi-analyst/
-│   ├── x-interact/
-│   ├── moltbook-interact/
-│   └── ... (18 total)
+│   ├── friday/                # 🔧 FRIDAY Skill System (TypeScript) ← F.R.I.D.A.Y Mark-1
+│   ├── deployment/            # Agent deploy, monitor, rate limiter
+│   ├── mcp/                   # MCP integration
+│   ├── runtime/               # Orchestrator, validators, auditors
+│   └── schemas/               # JSON schemas
+├── skills/                    # 🛠️ PRODUCTION SKILLS (19 total)
+│   ├── january/               # 🌌 January the Swarm Leader
+│   ├── dream-mode/            # 💭 Session composting
+│   ├── consensus/             # ⚖️ Voting protocol
+│   ├── memory-architecture/   # 🧠 3-layer + 5-file system
+│   ├── swarm-delegation/      # 🔀 Spawn decisions + abdication test
+│   ├── swarm-workflow-protocol/# 📡 Full workflow protocol
+│   ├── defi-analyst/          # 💰 DeFi research
+│   ├── x-interact/            # 🐦 X.com content
+│   └── ... (12 more)
 ├── docs/
-│   ├── paperclip/          # 📜 Agent identity docs ← paperclip-orchestration-january
-│   ├── protocols/          # 📡 Spawn logic, sparring model ← swarm-workflow-protocol
-│   ├── architecture/       # 🏗️ Colony arch, model routing, deployment ← swarm-architecture
-│   └── genesis/            # 🏛️ Origin: philosophy, personas, lessons ← ASP
+│   ├── paperclip/             # 📜 Agent identity docs
+│   ├── protocols/             # 📡 Workflow protocol readme
+│   └── architecture/          # 🏗️ Colony arch, model routing, deployment
 ├── Dockerfile
 ├── docker-compose.yml
-└── .github/workflows/      # CI/CD pipelines
+└── .github/workflows/         # CI/CD pipelines
 ```
 
 ---
@@ -232,9 +252,29 @@ cd frontend && npm install && npm run dev
 docker-compose up
 ```
 
-### Run 10-D Council
+### Python API — Swarm
 ```python
-from app.services.council import ConsensusEngine, CouncilOrchestrator
+from app.services.swarm import CostOptimizedSwarmCoordinator
+
+coordinator = CostOptimizedSwarmCoordinator(
+    swarm_id="necroswarm",
+    message_bus=InMemoryMessageBus(),
+    role_manager=RoleManager(...),
+    consensus_engine=ConsensusEngine(...),
+    config=CostOptimizedConfig(
+        enable_semantic_cache=True,
+        enable_early_termination=True,
+    )
+)
+
+result = await coordinator.run_ephemeral_task_optimized(
+    task="Analyze this report", role=AgentRole.ANALYST
+)
+```
+
+### Python API — 10-D Council
+```python
+from app.services.council import ConsensusEngine
 
 engine = ConsensusEngine({"consensus_method": "weighted_majority"})
 verdict = engine.weighted_majority(
@@ -245,31 +285,31 @@ verdict = engine.weighted_majority(
 )
 ```
 
-### Use FRIDAY Skill System
+### TypeScript — FRIDAY Skills
 ```typescript
 import { SkillRegistry } from "./lib/friday/core/registry";
 import { HeartbeatEngine } from "./lib/friday/core/heartbeat";
-import { defineSkill } from "./lib/friday/core/define-skill";
 
 const registry = new SkillRegistry();
 const heartbeat = new HeartbeatEngine(registry, {
   intervalMs: 30000,
-  timeoutMs: 60000,
   agentId: "necroswarm-1",
 });
 ```
 
 ---
 
-## Model Tier Pricing
+## Hard-Won Lessons
 
-| Tier | Model | Cost/1K tokens | Use For |
-|------|-------|----------------|---------|
-| **FREE** | ollama/phi3 | $0.00 | Formatting, simple transforms |
-| **FREE** | ollama/qwen2.5:3b | $0.00 | Basic reasoning, local testing |
-| **LOW** | ilmu-mini | $0.0001 | Web search, data extraction |
-| **MEDIUM** | claude-haiku-3.5 | $0.00125 | Analysis, filtering, code |
-| **HIGH** | kimi-k2.5:cloud | $0.005 | Complex synthesis, planning |
+1. **qwen2.5:3b goes zombie** — Locks up on long context. kimi-k2.5:cloud is the workhorse.
+2. **Context windows will hit you** — Without layered memory, coherence breaks mid-session.
+3. **The 5-file structure works** — Separates durable knowledge from ephemeral state.
+4. **Forgiveness over forgetting** — Perfect memory is a curse. Active letting-go, not passive dumping.
+5. **3 agents is the sweet spot** — Enough specialization, not too much coordination overhead.
+6. **The relay server works** — Port 18790, auth token: agent-relay-secret-2026.
+7. **Spawn to leverage, not to escape** — The Abdication Test catches avoidance-spawning.
+
+See `docs/LESSONS.md` for the full journal.
 
 ---
 
@@ -278,8 +318,9 @@ const heartbeat = new HeartbeatEngine(registry, {
 | Version | Date | What Died | What Was Born |
 |---------|------|-----------|--------------|
 | v1.0.0 | Apr 16, 2026 | npc_001, Light_Agentic_Agent | Core swarm from convergent extinction |
-| v1.1.0 | Apr 16, 2026 | F.R.I.D.A.Y, 10-D Council, paperclip, swarm-kit, workflow-protocol, swarm-arch | Full system: skill system + consensus + 14 skills + protocols + deployment |
-| v1.2.0 | Apr 16, 2026 | openclaw-january-skill | January identity manifest + genesis protocols (dream mode, memory arch, philosophy) absorbed from ASP |
+| v1.1.0 | Apr 16, 2026 | F.R.I.D.A.Y, 10-D Council, paperclip, swarm-kit, workflow-protocol, swarm-arch | Full system: skills + consensus + protocols |
+| v1.2.0 | Apr 16, 2026 | openclaw-january-skill | January identity + genesis protocols |
+| v1.3.0 | Apr 16, 2026 | ASP, sovereignstack, VOIDLORD | Sovereign economics + philosophy unified. VOIDLORD was the bridge; NECROSWARM is the final form. |
 
 ---
 
