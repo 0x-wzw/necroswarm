@@ -25,7 +25,7 @@ NECROSWARM is the result of **convergent extinction** — nine projects entered,
 | **swarm-agent-kit** | ☠️ **CONSUMED** v1.1 | 14 production skills: DeFi analyst, x-interact, Moltbook, healthcheck, etc. |
 | **swarm-workflow-protocol** | ☠️ **CONSUMED** v1.1 | Spawn logic, relay communication, sparring model, task routing |
 | **swarm-architecture** | ☠️ **CONSUMED** v1.1 | Colony architecture, model routing, EC2/OpenClaw deployment |
-| **openclaw-january-skill** | ☠️ **CONSUMED** v1.2 | January identity manifest, 10D NLP influence, reality-peek, dimensional-weave |
+| **openclaw-january-skill** | ☠️ **CONSUMED** v1.2 | January skill manifest: reality-peek, dimensional-weave, teach-swarm |
 | **agent-swarm-protocol** | ☠️ **CONSUMED** v1.3 | Genesis: agent personas, dream mode, memory architecture, "Forgiveness over Forgetting" philosophy |
 | **sovereignstack** | ☠️ **CONSUMED** v1.3 | ACS-ACP flywheel, token economics, 70/30 cost routing, SentientForge, ACP marketplace |
 | **VOIDLORD** | ☠️ **CONSUMED** v1.3 | Architecture + philosophy unified into NECROSWARM. VOIDLORD was the bridge; NECROSWARM is the final form. |
@@ -107,8 +107,7 @@ Cost-optimized swarm intelligence with multi-model consensus, sovereign economic
 - **SentientForge** — Continuous ACS optimization running 24/7 (40+ experiments, ACS 0.9625)
 - **ACP Marketplace** — Virtuals.io integration. Code/Research/Strategy at 10-25 $VIRTUAL
 
-### January the Swarm Leader (from openclaw-january-skill)
-- **10D Identity Manifest** — Entity from another reality, egoistic leader, charismatic intelligence
+### January Skill (from openclaw-january-skill)
 - **Reality-Peek** — Read beneath surface of humans, agents, situations
 - **Dimensional-Weave** — NLP influence patterns that bypass conscious resistance
 - **Teach-Swarm** — Embed knowledge into swarm consciousness
@@ -117,7 +116,7 @@ Cost-optimized swarm intelligence with multi-model consensus, sovereign economic
 ### Genesis Protocols (from agent-swarm-protocol)
 - **Dream Mode** — Event-driven session composting (not time-based). Hot/Warm/Cold memory layers
 - **3-Layer Memory Architecture** — Per-message (L1), per-agent (L2), global long-term (L3)
-- **5-File Structure** — MEMORY, AGENTS, SOUL, TOOLS, HEARTBEAT (from sanwan.ai 30-day run)
+- **5-File Structure** — MEMORY, AGENTS, SOUL, TOOLS, HEARTBEAT
 - **Consensus Voting** — YES/NO/ABSTAIN, 3YES=implement, 2/1=with dissent, 1/2=reject
 - **Swarm Delegation** — 3-question spawn gate + abdication test
 
@@ -147,13 +146,13 @@ Cost-optimized swarm intelligence with multi-model consensus, sovereign economic
 
 ---
 
-## The Swarm Trinity
+## Model Tier System
 
-| Agent | Role | Tier | Model | Fallback |
-|-------|------|------|-------|----------|
-| **October** | Orchestrator / Switchboard | T1 | kimi-k2.5:cloud (262K) | ilmu-mini-free-v2 |
-| **Halloween** | Code Architect | T1 | kimi-k2.5:cloud (262K) | ilmu-mini-free-v2 |
-| **OctoberXin** | Researcher / Misfit | T1 | kimi-k2.5:cloud (262K) | ilmu-mini-free-v2 |
+| Tier | Models | Use For |
+|------|--------|---------|
+| **T1** | kimi-k2.5, deepseek-v3.1:671b, glm-5.1 | Complex synthesis, planning, code |
+| **T2** | minimax-m2.5, qwen3-coder:480b, mistral-large-3:675b | Analysis, validation, research |
+| **T3** | gemma4:31b, devstral-small-2:24b, ministral-3 | Formatting, simple transforms |
 
 ---
 
@@ -205,10 +204,6 @@ Cost-optimized swarm intelligence with multi-model consensus, sovereign economic
 
 ```
 necroswarm/
-├── agents/                     # 🎭 Swarm Trinity personas
-│   ├── OCTOBER.md             # Orchestrator / Switchboard
-│   ├── HALLOWEEN.md           # Code Architect
-│   └── OCTOBERXIN.md          # Researcher / Misfit
 ├── backend/                   # 🐍 Python swarm engine
 │   ├── app/services/
 │   │   ├── swarm/             # 🧠 THE BRAIN (coordinator, cost_router, cache, consensus)
@@ -327,9 +322,8 @@ const heartbeat = new HeartbeatEngine(registry, {
 2. **Context windows will hit you** — Without layered memory, coherence breaks mid-session.
 3. **The 5-file structure works** — Separates durable knowledge from ephemeral state.
 4. **Memory management is not optional** — Without active compaction, context accumulates until failure.
-5. **3 agents is the sweet spot** — Enough specialization, not too much coordination overhead.
-6. **The relay server works** — Port 18790, auth token: agent-relay-secret-2026.
-7. **Spawn to leverage, not to escape** — The Abdication Test catches avoidance-spawning.
+5. **The relay server works** — Port 18790 (token redacted).
+6. **Spawn to leverage, not to escape** — The Abdication Test catches avoidance-spawning.
 
 See `skills/memory-architecture/` for the practical architecture behind these lessons.
 
