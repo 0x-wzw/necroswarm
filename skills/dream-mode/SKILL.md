@@ -1,4 +1,4 @@
-# Dream Mode — FRIDAY Mark-1 Module
+# Dream Mode — NECROSWARM Module
 
 ## Concept
 Event-driven session compaction. Not time-based. Not a backup. **Composting.**
@@ -33,4 +33,4 @@ Event-driven session compaction. Not time-based. Not a backup. **Composting.**
 | Cold | MEMORY.md + archive | Long-term |
 
 ## Integration
-Part of F.R.I.D.A.Y. Mark-1. Triggered by heartbeat.
+Part of NECROSWARM. Triggered by heartbeat.

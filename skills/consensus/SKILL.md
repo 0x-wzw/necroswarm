@@ -1,4 +1,4 @@
-# Consensus — FRIDAY Mark-1 Module
+# Consensus — NECROSWARM Module
 
 ## When
 Use for shared infrastructure decisions, shared skills, protocols, architecture changes.
@@ -25,4 +25,4 @@ Use for shared infrastructure decisions, shared skills, protocols, architecture 
 ```
 
 ## Integration
-Part of F.R.I.D.A.Y. Mark-1 skill system.
+Part of NECROSWARM skill system.

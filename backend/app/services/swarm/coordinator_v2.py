@@ -10,7 +10,7 @@ Key improvements over v1:
 - Early termination (30-50% fewer agents spawned)
 - Predictive prefetching (proactive computation)
 
-Target: $0.01-0.10 per simulation (vs $10 in v1, vs $1000 MiroFish)
+Target: $0.01-0.10 per simulation (vs $10 in v1, vs $1000 NECROSWARM)
 """
 
 from __future__ import annotations

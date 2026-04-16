@@ -1,6 +1,6 @@
 import { getMcpServer } from "@/lib/mcp/registry";
 import { resolveAuthToken } from "@/lib/mcp/auth";
-import { executeMirofishTool } from "@/lib/mcp/mirofish";
+import { executeNECROSWARMTool } from "@/lib/mcp/necroswarm";
 
 export interface MCPToolCallRequest {
   server_id: string;
@@ -11,18 +11,18 @@ export interface MCPToolCallRequest {
 export interface MCPToolCallResponse {
   ok: boolean;
   data: unknown;
-  transport: "stdio" | "https" | "mirofish";
+  transport: "stdio" | "https" | "necroswarm";
 }
 
 export async function executeMcpTool(request: MCPToolCallRequest): Promise<MCPToolCallResponse> {
   const server = getMcpServer(request.server_id);
   const token = resolveAuthToken(server.auth_ref);
 
-  if (server.transport === "mirofish") {
-    const result = await executeMirofishTool(request.tool, request.args);
+  if (server.transport === "necroswarm") {
+    const result = await executeNECROSWARMTool(request.tool, request.args);
     return {
       ok: result.ok,
-      transport: "mirofish",
+      transport: "necroswarm",
       data: result.data
     };
   }

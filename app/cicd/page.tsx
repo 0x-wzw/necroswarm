@@ -32,7 +32,7 @@ interface DeployRecord {
   completed_at?: string;
 }
 
-interface MirofishHealth {
+interface NECROSWARMHealth {
   reachable: boolean;
   tools_count?: number;
   error?: string;
@@ -121,7 +121,7 @@ function seedPipelineRuns(): PipelineRun[] {
     },
     {
       id: "ci-99",
-      branch: "feature/mirofish",
+      branch: "feature/necroswarm",
       commit: "4717fd4",
       trigger: "pull_request",
       status: "running",
@@ -162,7 +162,7 @@ function seedDeployments(): DeployRecord[] {
 export default function CICDPage() {
   const [runs, setRuns] = useState<PipelineRun[]>([]);
   const [deploys, setDeploys] = useState<DeployRecord[]>([]);
-  const [mirofish, setMirofish] = useState<MirofishHealth | null>(null);
+  const [necroswarm, setNECROSWARM] = useState<NECROSWARMHealth | null>(null);
   const [refreshing, setRefreshing] = useState(false);
 
   const refresh = useCallback(async () => {
@@ -172,20 +172,20 @@ export default function CICDPage() {
     setRuns(seedPipelineRuns());
     setDeploys(seedDeployments());
 
-    // MiroFish health check
+    // NECROSWARM health check
     try {
-      const res = await fetch("/api/mirofish");
+      const res = await fetch("/api/necroswarm");
       if (res.ok) {
         const data = await res.json();
-        setMirofish({
+        setNECROSWARM({
           reachable: true,
           tools_count: data.tools?.length ?? 0,
         });
       } else {
-        setMirofish({ reachable: false, error: `HTTP ${res.status}` });
+        setNECROSWARM({ reachable: false, error: `HTTP ${res.status}` });
       }
     } catch (e) {
-      setMirofish({
+      setNECROSWARM({
         reachable: false,
         error: (e as Error).message,
       });
@@ -250,12 +250,12 @@ export default function CICDPage() {
             detail="localhost:3000"
           />
           <HealthTile
-            name="MiroFish"
-            ok={mirofish?.reachable ?? false}
+            name="NECROSWARM"
+            ok={necroswarm?.reachable ?? false}
             detail={
-              mirofish?.reachable
-                ? `${mirofish.tools_count} tools available`
-                : mirofish?.error ?? "Checking..."
+              necroswarm?.reachable
+                ? `${necroswarm.tools_count} tools available`
+                : necroswarm?.error ?? "Checking..."
             }
           />
         </div>

@@ -21,7 +21,7 @@ export async function runWorker(input: WorkerInput): Promise<WorkerOutput> {
 
   if (firstSkill?.tools_allowed.length) {
     const candidateTool = firstSkill.tools_allowed[0];
-    const serverId = candidateTool.startsWith("mirofish.") ? "mirofish" : "remote_default";
+    const serverId = candidateTool.startsWith("necroswarm.") ? "necroswarm" : "remote_default";
     try {
       const mcpResponse = await routeToolCall(
         {

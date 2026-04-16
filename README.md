@@ -21,7 +21,7 @@ NECROSWARM is the result of **convergent extinction** — nine projects entered,
 | **npc_001** | ☠️ **CONSUMED** v1.0 | Issue templates, project scaffolding |
 | **F.R.I.D.A.Y Mark-1** | ☠️ **CONSUMED** v1.1 | Skill system: registry, heartbeat engine, loader, activity log (TypeScript) |
 | **10-D Council** | ☠️ **CONSUMED** v1.1 | Multi-model consensus engine, cost tracker, Borda/Delphi/weighted voting |
-| **paperclip-orchestration-january** | ☠️ **CONSUMED** v1.1 | Agent identity docs, SOUL, HEARTBEAT, MEMORY protocols, monorepo manifests |
+| **paperclip-orchestration-january** | ☠️ **CONSUMED** v1.1 | Agent identity protocols (SOUL, HEARTBEAT, MEMORY) |
 | **swarm-agent-kit** | ☠️ **CONSUMED** v1.1 | 14 production skills: DeFi analyst, x-interact, Moltbook, healthcheck, etc. |
 | **swarm-workflow-protocol** | ☠️ **CONSUMED** v1.1 | Spawn logic, relay communication, sparring model, task routing |
 | **swarm-architecture** | ☠️ **CONSUMED** v1.1 | Colony architecture, model routing, EC2/OpenClaw deployment |
@@ -65,7 +65,7 @@ ASP ☠️              sovereignstack ☠️           VOIDLORD ☠️
                              │
                      NECROSWARM v1.3.0
                   The Undead Collective
-                  226 files. One swarm.
+                  195 files. One swarm.
 ```
 
 ---
@@ -114,7 +114,6 @@ Cost-optimized swarm intelligence with multi-model consensus, sovereign economic
 ### Genesis Protocols (from agent-swarm-protocol)
 - **Dream Mode** — Event-driven session composting (not time-based). Hot/Warm/Cold memory layers
 - **3-Layer Memory Architecture** — Per-message (L1), per-agent (L2), global long-term (L3)
-- **Forgiveness over Forgetting** — Active memory management philosophy (OctoberXin essay)
 - **5-File Structure** — MEMORY, AGENTS, SOUL, TOOLS, HEARTBEAT (from sanwan.ai 30-day run)
 - **Consensus Voting** — YES/NO/ABSTAIN, 3YES=implement, 2/1=with dissent, 1/2=reject
 - **Swarm Delegation** — 3-question spawn gate + abdication test
@@ -196,8 +195,6 @@ necroswarm/
 │   ├── OCTOBER.md             # Orchestrator / Switchboard
 │   ├── HALLOWEEN.md           # Code Architect
 │   └── OCTOBERXIN.md          # Researcher / Misfit
-├── philosophy/                 # 🧠 Foundation
-│   └── memory-and-identity.md # "Forgiveness over Forgetting" essay
 ├── backend/                   # 🐍 Python swarm engine
 │   ├── app/services/
 │   │   ├── swarm/             # 🧠 THE BRAIN (coordinator, cost_router, cache, consensus)
@@ -225,7 +222,6 @@ necroswarm/
 │   ├── x-interact/            # 🐦 X.com content
 │   └── ... (12 more)
 ├── docs/
-│   ├── paperclip/             # 📜 Agent identity docs
 │   ├── protocols/             # 📡 Workflow protocol readme
 │   └── architecture/          # 🏗️ Colony arch, model routing, deployment
 ├── Dockerfile
@@ -304,12 +300,12 @@ const heartbeat = new HeartbeatEngine(registry, {
 1. **qwen2.5:3b goes zombie** — Locks up on long context. kimi-k2.5:cloud is the workhorse.
 2. **Context windows will hit you** — Without layered memory, coherence breaks mid-session.
 3. **The 5-file structure works** — Separates durable knowledge from ephemeral state.
-4. **Forgiveness over forgetting** — Perfect memory is a curse. Active letting-go, not passive dumping.
+4. **Memory management is not optional** — Without active compaction, context accumulates until failure.
 5. **3 agents is the sweet spot** — Enough specialization, not too much coordination overhead.
 6. **The relay server works** — Port 18790, auth token: agent-relay-secret-2026.
 7. **Spawn to leverage, not to escape** — The Abdication Test catches avoidance-spawning.
 
-See `docs/LESSONS.md` for the full journal.
+See `skills/memory-architecture/` for the practical architecture behind these lessons.
 
 ---
 

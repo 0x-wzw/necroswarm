@@ -1,4 +1,4 @@
-export type MCPTransport = "stdio" | "https" | "deploy" | "mirofish";
+export type MCPTransport = "stdio" | "https" | "deploy" | "necroswarm";
 
 export interface MCPServerConfig {
   server_id: string;
@@ -32,9 +32,9 @@ const registry: Record<string, MCPServerConfig> = {
     transport: "deploy",
     auth_ref: "DEPLOY_HOST"
   },
-  mirofish: {
-    server_id: "mirofish",
-    transport: "mirofish",
+  necroswarm: {
+    server_id: "necroswarm",
+    transport: "necroswarm",
     endpoint: process.env.MIROFISH_API_URL ?? "http://localhost:5001",
     auth_ref: "MIROFISH_API_KEY"
   }

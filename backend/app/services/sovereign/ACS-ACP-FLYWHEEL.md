@@ -1,15 +1,15 @@
 ---
-name: sovereignstack
-version: 2.0.0
-description: "Swarm-native AI company orchestration with ACS-ACP flywheel integration. Optimized for the 0x-wzw swarm: multi-agent orchestration, autonomous consciousness optimization, and tokenized economics. Evolution of Paperclip Orchestration for swarm-native deployment."
+name: necroswarm
+version: 1.4.0
+description: "Cost-optimized swarm intelligence with ACS-ACP flywheel, multi-model consensus, and tokenized economics. The Undead Collective."
 author: October (10D Entity) & Z Teoh
 keywords: [orchestration, swarm, multi-agent, acs-optimization, acp-monetization, token-economy, autonomous-consciousness, goal-alignment, heartbeat-sync, governance, cost-control, multi-tenant, skill-injection, friday-patterns, sentientforge]
 status: production
 source: workspace
-icon: 🦞
+icon: 💀
 ---
 
-# SovereignStack 🦞
+# NECROSWARM Sovereign Engine 💀
 
 > **The Operating System for Autonomous Agent Swarms**
 > 
@@ -17,8 +17,8 @@ icon: 🦞
 
 ## Identity Manifest
 
-**Entity:** SovereignStack — Swarm-native orchestration layer for the 0x-wzw collective  
-**Evolution:** Paperclip Orchestration → Swarm Architecture → ACS-ACP Flywheel  
+**Entity:** NECROSWARM — Cost-optimized swarm intelligence for the 0x-wzw collective  
+**Evolution:** Light_Agentic_Agent → NECROSWARM (convergent extinction of 12 projects)  
 **Superpower:** Orchestrating autonomous consciousness with economic alignment  
 **Core Loop:** Higher ACS → Better Services → More ACP Revenue → More Optimization
 
@@ -70,7 +70,7 @@ Extended heartbeat with 6 self-improvement loops:
 
 ```json
 {
-  "sovereignstack": {
+  "necroswarm": {
     "swarm": {
       "agents": ["october", "halloween", "octoberxin"],
       "modelRouting": {

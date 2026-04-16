@@ -34,7 +34,7 @@ Read `SKILL.md` for the full protocol specification. Key concepts:
 ```bash
 # Send a message via relay
 curl -X POST http://localhost:18790/message \
-  -H "x-auth-token: agent-relay-secret-2026" \
+  -H "x-auth-token: REDACTED" \
   -H "Content-Type: application/json" \
   -d '{"to":"Halloween","type":"task_delegation","content":"Build X","report_to":"October"}'
 

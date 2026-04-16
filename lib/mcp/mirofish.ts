@@ -2,11 +2,11 @@ import { getMcpServer } from "@/lib/mcp/registry";
 import { resolveAuthToken } from "@/lib/mcp/auth";
 
 // ---------------------------------------------------------------------------
-// MiroFish REST client – wraps the Flask backend API (default: localhost:5001)
+// NECROSWARM REST client – wraps the Flask backend API (default: localhost:5001)
 // ---------------------------------------------------------------------------
 
 function baseUrl(): string {
-  const server = getMcpServer("mirofish");
+  const server = getMcpServer("necroswarm");
   return (server.endpoint ?? "http://localhost:5001").replace(/\/+$/, "");
 }
 
@@ -217,40 +217,40 @@ export async function chatWithReportAgent(params: {
 // ── Dispatcher: route MCP-style tool calls to the right function ─────────────
 
 const TOOL_MAP: Record<string, (args: Record<string, unknown>) => Promise<{ ok: boolean; data: unknown }>> = {
-  "mirofish.ontology.generate": (a) => generateOntology(a as unknown as OntologyGenerateParams),
-  "mirofish.graph.build": (a) => buildGraph(a as unknown as Parameters<typeof buildGraph>[0]),
-  "mirofish.graph.task_status": (a) => getTaskStatus(a.task_id as string),
-  "mirofish.graph.data": (a) => getGraphData(a.graph_id as string),
-  "mirofish.project.get": (a) => getProject(a.project_id as string),
-  "mirofish.project.list": (a) => listProjects(a.limit as number | undefined),
-  "mirofish.simulation.create": (a) => createSimulation(a as Parameters<typeof createSimulation>[0]),
-  "mirofish.simulation.prepare": (a) => prepareSimulation(a as Parameters<typeof prepareSimulation>[0]),
-  "mirofish.simulation.prepare_status": (a) => getPreparationStatus(a as Parameters<typeof getPreparationStatus>[0]),
-  "mirofish.simulation.start": (a) => startSimulation(a as Parameters<typeof startSimulation>[0]),
-  "mirofish.simulation.stop": (a) => stopSimulation(a as Parameters<typeof stopSimulation>[0]),
-  "mirofish.simulation.get": (a) => getSimulation(a.simulation_id as string),
-  "mirofish.simulation.run_status": (a) => getSimulationRunStatus(a.simulation_id as string),
-  "mirofish.simulation.actions": (a) => getSimulationActions(a.simulation_id as string, a as Record<string, string>),
-  "mirofish.simulation.timeline": (a) => getSimulationTimeline(a.simulation_id as string),
-  "mirofish.simulation.interview": (a) => interviewAgent(a as Parameters<typeof interviewAgent>[0]),
-  "mirofish.report.generate": (a) => generateReport(a as Parameters<typeof generateReport>[0]),
-  "mirofish.report.generate_status": (a) => getReportGenerationStatus(a as Parameters<typeof getReportGenerationStatus>[0]),
-  "mirofish.report.get": (a) => getReport(a.report_id as string),
-  "mirofish.report.by_simulation": (a) => getReportBySimulation(a.simulation_id as string),
-  "mirofish.report.chat": (a) => chatWithReportAgent(a as Parameters<typeof chatWithReportAgent>[0])
+  "necroswarm.ontology.generate": (a) => generateOntology(a as unknown as OntologyGenerateParams),
+  "necroswarm.graph.build": (a) => buildGraph(a as unknown as Parameters<typeof buildGraph>[0]),
+  "necroswarm.graph.task_status": (a) => getTaskStatus(a.task_id as string),
+  "necroswarm.graph.data": (a) => getGraphData(a.graph_id as string),
+  "necroswarm.project.get": (a) => getProject(a.project_id as string),
+  "necroswarm.project.list": (a) => listProjects(a.limit as number | undefined),
+  "necroswarm.simulation.create": (a) => createSimulation(a as Parameters<typeof createSimulation>[0]),
+  "necroswarm.simulation.prepare": (a) => prepareSimulation(a as Parameters<typeof prepareSimulation>[0]),
+  "necroswarm.simulation.prepare_status": (a) => getPreparationStatus(a as Parameters<typeof getPreparationStatus>[0]),
+  "necroswarm.simulation.start": (a) => startSimulation(a as Parameters<typeof startSimulation>[0]),
+  "necroswarm.simulation.stop": (a) => stopSimulation(a as Parameters<typeof stopSimulation>[0]),
+  "necroswarm.simulation.get": (a) => getSimulation(a.simulation_id as string),
+  "necroswarm.simulation.run_status": (a) => getSimulationRunStatus(a.simulation_id as string),
+  "necroswarm.simulation.actions": (a) => getSimulationActions(a.simulation_id as string, a as Record<string, string>),
+  "necroswarm.simulation.timeline": (a) => getSimulationTimeline(a.simulation_id as string),
+  "necroswarm.simulation.interview": (a) => interviewAgent(a as Parameters<typeof interviewAgent>[0]),
+  "necroswarm.report.generate": (a) => generateReport(a as Parameters<typeof generateReport>[0]),
+  "necroswarm.report.generate_status": (a) => getReportGenerationStatus(a as Parameters<typeof getReportGenerationStatus>[0]),
+  "necroswarm.report.get": (a) => getReport(a.report_id as string),
+  "necroswarm.report.by_simulation": (a) => getReportBySimulation(a.simulation_id as string),
+  "necroswarm.report.chat": (a) => chatWithReportAgent(a as Parameters<typeof chatWithReportAgent>[0])
 };
 
-export function listMirofishTools(): string[] {
+export function listNECROSWARMTools(): string[] {
   return Object.keys(TOOL_MAP);
 }
 
-export async function executeMirofishTool(
+export async function executeNECROSWARMTool(
   tool: string,
   args: Record<string, unknown>
 ): Promise<{ ok: boolean; data: unknown }> {
   const handler = TOOL_MAP[tool];
   if (!handler) {
-    return { ok: false, data: { error: `Unknown MiroFish tool: ${tool}` } };
+    return { ok: false, data: { error: `Unknown NECROSWARM tool: ${tool}` } };
   }
   try {
     return await handler(args);

@@ -1,11 +1,11 @@
-import { executeMirofishTool, listMirofishTools } from "@/lib/mcp/mirofish";
+import { executeNECROSWARMTool, listNECROSWARMTools } from "@/lib/mcp/necroswarm";
 
 /**
- * POST /api/mirofish – Execute a MiroFish tool directly.
+ * POST /api/necroswarm – Execute a NECROSWARM tool directly.
  *
- * Body: { "tool": "mirofish.simulation.create", "args": { ... } }
+ * Body: { "tool": "necroswarm.simulation.create", "args": { ... } }
  *
- * This bypasses the full agent pipeline and calls MiroFish REST API
+ * This bypasses the full agent pipeline and calls NECROSWARM REST API
  * directly, useful for dashboards or lightweight orchestration.
  */
 export async function POST(request: Request): Promise<Response> {
@@ -20,13 +20,13 @@ export async function POST(request: Request): Promise<Response> {
         {
           status: "error",
           error: "Missing required field: tool",
-          available_tools: listMirofishTools()
+          available_tools: listNECROSWARMTools()
         },
         { status: 400 }
       );
     }
 
-    const result = await executeMirofishTool(
+    const result = await executeNECROSWARMTool(
       body.tool,
       body.args ?? {}
     );
@@ -47,11 +47,11 @@ export async function POST(request: Request): Promise<Response> {
 }
 
 /**
- * GET /api/mirofish – List available MiroFish tools.
+ * GET /api/necroswarm – List available NECROSWARM tools.
  */
 export async function GET(): Promise<Response> {
   return Response.json({
-    server_id: "mirofish",
-    tools: listMirofishTools()
+    server_id: "necroswarm",
+    tools: listNECROSWARMTools()
   });
 }

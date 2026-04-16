@@ -1,4 +1,4 @@
-# Swarm Delegation — FRIDAY Mark-1 Module
+# Swarm Delegation — NECROSWARM Module
 
 ## Overview
 Part of the F.R.I.D.A.Y. skill architecture. Handles multi-agent spawning decisions, context management, and token optimization for swarm orchestration.
@@ -50,4 +50,4 @@ Am I spawning to escape the problem, or because the problem has natural parallel
 **When you see these:** Pause. Re-classify. Stop spawning.
 
 ## Integration
-Part of F.R.I.D.A.Y. Mark-1 skill system.
+Part of NECROSWARM skill system.
