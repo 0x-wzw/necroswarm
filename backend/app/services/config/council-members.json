@@ -1,0 +1,179 @@
+{
+  "council": {
+    "name": "10-D Council",
+    "version": "2.0.0",
+    "description": "NECROSWARM distributed intelligence — 10 best-in-class models, each representing a distinct cognitive dimension"
+  },
+  "council_members": {
+    "synthesis": [
+      {
+        "id": "D1",
+        "name": "Synthesizer",
+        "dimension": "Synthesis",
+        "model": "ollama/kimi-k2.5:cloud",
+        "tier": "T1",
+        "vote_power": 1.2,
+        "weight": 0.9,
+        "capabilities": ["synthesis", "planning", "complex_reasoning"],
+        "context_window": 262000,
+        "description": "262K context window — connects disparate information into coherent narrative"
+      }
+    ],
+    "deep_reasoning": [
+      {
+        "id": "D2",
+        "name": "Deep Reasoner",
+        "dimension": "Deep Reasoning",
+        "model": "ollama/deepseek-v3.1:671b:cloud",
+        "tier": "T1",
+        "vote_power": 1.1,
+        "weight": 0.85,
+        "capabilities": ["deep_reasoning", "chain_of_thought", "analysis"],
+        "context_window": 131000,
+        "description": "671B parameters — deepest analytical reasoning in the swarm"
+      }
+    ],
+    "code": [
+      {
+        "id": "D3",
+        "name": "Code Architect",
+        "dimension": "Code",
+        "model": "ollama/qwen3-coder:480b:cloud",
+        "tier": "T1",
+        "vote_power": 1.1,
+        "weight": 0.85,
+        "capabilities": ["code", "debugging", "architecture", "implementation"],
+        "context_window": 131000,
+        "description": "480B code specialist — generation, debugging, system design"
+      }
+    ],
+    "vision": [
+      {
+        "id": "D4",
+        "name": "Visionary",
+        "dimension": "Vision",
+        "model": "ollama/qwen3-vl:235b:cloud",
+        "tier": "T2",
+        "vote_power": 1.0,
+        "weight": 0.75,
+        "capabilities": ["vision", "multimodal", "visual_reasoning"],
+        "context_window": 131000,
+        "description": "Multimodal — sees what others can't, processes images and diagrams"
+      }
+    ],
+    "strategy": [
+      {
+        "id": "D5",
+        "name": "Strategist",
+        "dimension": "Strategy",
+        "model": "ollama/cogito-2.1:671b:cloud",
+        "tier": "T1",
+        "vote_power": 1.0,
+        "weight": 0.8,
+        "capabilities": ["strategy", "game_theory", "planning", "decision_making"],
+        "context_window": 131000,
+        "description": "Strategic planning — sees 10 moves ahead, game theory and decision trees"
+      }
+    ],
+    "analysis": [
+      {
+        "id": "D6",
+        "name": "Analyst",
+        "dimension": "Analysis",
+        "model": "ollama/mistral-large-3:675b:cloud",
+        "tier": "T1",
+        "vote_power": 1.0,
+        "weight": 0.8,
+        "capabilities": ["analysis", "synthesis", "large_context"],
+        "context_window": 131000,
+        "description": "675B large-context analysis — decompose complex systems"
+      }
+    ],
+    "general": [
+      {
+        "id": "D7",
+        "name": "Generalist",
+        "dimension": "General",
+        "model": "ollama/glm-5.1:cloud",
+        "tier": "T1",
+        "vote_power": 0.9,
+        "weight": 0.7,
+        "capabilities": ["general", "fast_reasoning", "balanced"],
+        "context_window": 131000,
+        "description": "Fast balanced generalist — rapid assessment across domains"
+      }
+    ],
+    "verification": [
+      {
+        "id": "D8",
+        "name": "Verifier",
+        "dimension": "Verification",
+        "model": "ollama/nemotron-3-super:cloud",
+        "tier": "T1",
+        "vote_power": 1.15,
+        "weight": 0.85,
+        "capabilities": ["verification", "fact_checking", "consistency"],
+        "context_window": 131000,
+        "description": "High-accuracy verification — catches what others miss, fact-checks claims"
+      }
+    ],
+    "research": [
+      {
+        "id": "D9",
+        "name": "Researcher",
+        "dimension": "Research",
+        "model": "ollama/minimax-m2.5:cloud",
+        "tier": "T2",
+        "vote_power": 0.9,
+        "weight": 0.7,
+        "capabilities": ["research", "information_synthesis", "balanced_analysis"],
+        "context_window": 131000,
+        "description": "Balanced research — comprehensive information gathering and synthesis"
+      }
+    ],
+    "extended_thinking": [
+      {
+        "id": "D10",
+        "name": "Deep Thinker",
+        "dimension": "Extended Thinking",
+        "model": "ollama/kimi-k2:1t:cloud",
+        "tier": "Think",
+        "vote_power": 1.2,
+        "weight": 0.9,
+        "capabilities": ["extended_reasoning", "deep_analysis", "second_order_effects"],
+        "context_window": 262000,
+        "description": "Extended thinking — slow but thorough, considers second and third-order effects"
+      }
+    ]
+  },
+  "council_rules": {
+    "quorum": 0.6,
+    "supermajority": 0.7,
+    "consensus_threshold": 0.8,
+    "max_debate_rounds": 3,
+    "stakes_routing": {
+      "low": ["D7", "D9"],
+      "medium": ["D2", "D7", "D9"],
+      "high": ["D1", "D2", "D6", "D8"],
+      "critical": ["D1", "D2", "D3", "D5", "D6", "D8", "D10"]
+    },
+    "stakes_descriptions": {
+      "low": "2 members — Generalist + Researcher for quick assessment",
+      "medium": "3 members — Deep Reasoner + Generalist + Researcher",
+      "high": "4 members — Synthesizer + Deep Reasoner + Analyst + Verifier",
+      "critical": "7 members — Full strategic council, all key dimensions"
+    }
+  },
+  "fallback_models": {
+    "D1": "ollama/glm-5.1:cloud",
+    "D2": "ollama/kimi-k2.5:cloud",
+    "D3": "ollama/devstral-2:123b:cloud",
+    "D4": "ollama/gemma4:31b:cloud",
+    "D5": "ollama/kimi-k2.5:cloud",
+    "D6": "ollama/minimax-m2.5:cloud",
+    "D7": "ollama/gemma3:27b:cloud",
+    "D8": "ollama/deepseek-v3.1:671b:cloud",
+    "D9": "ollama/gemma3:27b:cloud",
+    "D10": "ollama/kimi-k2.5:cloud"
+  }
+}

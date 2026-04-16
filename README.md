@@ -85,11 +85,24 @@ Cost-optimized swarm intelligence with multi-model consensus, sovereign economic
 - **Predictive Prefetch** — Pre-compute likely next tasks
 
 ### 10-D Council (from 10d-council)
-- **Multi-Model Consensus** — Weighted majority, Borda count, Delphi method, supermajority
-- **Tiered Voting** — T1/T2/T3 models with proportional vote power
-- **Fast-Path Validation** — Low-stakes claims skip full council
-- **Cost Tracking** — Per-validation cost analysis with savings metrics
-- **Hallucination Reduction** — 83% (12.3% → 2.1%)
+Each dimension = best-in-class model for that cognitive capability:
+
+| Dimension | Model | Tier | Capability |
+|-----------|-------|------|------------|
+| D1 Synthesis | kimi-k2.5:cloud | T1 | 262K context, complex synthesis, planning |
+| D2 Deep Reasoning | deepseek-v3.1:671b:cloud | T1 | 671B deep analytical reasoning |
+| D3 Code | qwen3-coder:480b:cloud | T1 | Code generation, debugging, architecture |
+| D4 Vision | qwen3-vl:235b:cloud | T2 | Multimodal vision+language |
+| D5 Strategy | cogito-2.1:671b:cloud | T1 | Strategic planning, game theory |
+| D6 Analysis | mistral-large-3:675b:cloud | T1 | Large-context analysis |
+| D7 General | glm-5.1:cloud | T1 | Fast general-purpose |
+| D8 Verification | nemotron-3-super:cloud | T1 | High-accuracy fact-checking |
+| D9 Research | minimax-m2.5:cloud | T2 | Balanced research synthesis |
+| D10 Extended Thinking | kimi-k2:1t:cloud | Think | Slow thorough second-order reasoning |
+
+**Stakes routing:** Low → D7+D9 (2 seats) | Medium → D2+D7+D9 (3 seats) | High → D1+D2+D6+D8 (4 seats) | Critical → D1–D10 (7+ seats)
+**Hallucination reduction:** 83% (12.3% → 2.1%)
+**Consensus:** Weighted majority, Borda count, Delphi method
 
 ### FRIDAY Skill System (from F.R.I.D.A.Y Mark-1)
 - **Skill Registry** — Self-describing, independently loadable capabilities

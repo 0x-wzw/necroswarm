@@ -31,10 +31,11 @@ class TaskComplexity(Enum):
 
 class CostTier(Enum):
     """Cost tiers for model selection."""
-    FREE = "free"         # Local Ollama models
+    FREE = "free"         # Local models
     LOW = "low"           # Cost-saving cloud models (gemma3, ministral)
-    MEDIUM = "medium"     # Mid-tier (Haiku, Llama)
-    HIGH = "high"         # Premium (Sonnet, GPT-4)
+    MEDIUM = "medium"     # Mid-tier cloud models
+    HIGH = "high"         # Premium cloud models
+    THINK = "think"       # Extended reasoning models
 
 
 @dataclass

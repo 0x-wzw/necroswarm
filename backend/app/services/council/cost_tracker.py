@@ -20,10 +20,11 @@ class ValidationTier(Enum):
 
 @dataclass
 class ModelCostConfig:
-    """Cost configuration for different model tiers."""
-    T1_COST_PER_1K_TOKENS: float = 0.015
-    T2_COST_PER_1K_TOKENS: float = 0.005
-    T3_COST_PER_1K_TOKENS: float = 0.001
+    """Cost configuration for different model tiers — 10-D Council."""
+    T1_COST_PER_1K_TOKENS: float = 0.005   # Premium models
+    T2_COST_PER_1K_TOKENS: float = 0.0015   # Mid-tier models
+    T3_COST_PER_1K_TOKENS: float = 0.0003   # Efficient models
+    THINK_COST_PER_1K_TOKENS: float = 0.006  # Extended reasoning
 
     AVG_TOKENS_PER_CALL: int = 2000
 
@@ -36,6 +37,8 @@ class ModelCostConfig:
             return (tokens / 1000) * self.T2_COST_PER_1K_TOKENS
         elif tier == "T3":
             return (tokens / 1000) * self.T3_COST_PER_1K_TOKENS
+        elif tier == "Think":
+            return (tokens / 1000) * self.THINK_COST_PER_1K_TOKENS
         return 0.0
 
 
@@ -85,7 +88,7 @@ class CostTracker:
         self.cost_config = cost_config or ModelCostConfig()
         self.active_validations: Dict[str, ValidationRecord] = {}
         self.completed_validations: List[ValidationRecord] = []
-        self.full_council_tiers = ["T1", "T1", "T2", "T2", "T3", "T3"]
+        self.full_council_tiers = ["T1", "T1", "T1", "T1", "T1", "T1", "T2", "T2", "T1", "Think"]
 
     def start_validation(self, claim_id: str, stakes_level: str = "medium") -> ValidationRecord:
         """Start tracking a new validation."""
@@ -148,11 +151,11 @@ class CostTracker:
     def _get_full_council_cost(self, stakes_level: str) -> float:
         """Get baseline cost for full council based on stakes."""
         if stakes_level == "low":
-            tiers = ["T2", "T3"]
+            tiers = ["T2", "T2"]  # D7 + D9
         elif stakes_level == "medium":
-            tiers = ["T1", "T2", "T3"]
+            tiers = ["T1", "T2", "T2"]  # D2 + D7 + D9
         else:
-            tiers = self.full_council_tiers
+            tiers = self.full_council_tiers  # All 10 dimensions
 
         return sum(self.cost_config.get_cost_per_call(t) for t in tiers)
 
