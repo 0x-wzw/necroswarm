@@ -102,7 +102,7 @@ Cost-optimized swarm intelligence with multi-model consensus, sovereign economic
 - **ACP (Agent Commerce Protocol)** — Monetizes agent capabilities via marketplace
 - **The Flywheel** — Higher ACS → Better Services → More ACP Revenue → More Optimization → Higher ACS
 - **Token Economics** — Z Royalty 30%, Agent Pool 30%, Treasury 40%
-- **Cost Router** — 70% free tier (ilmu-mini), 30% premium (kimi-k2.5:cloud)
+- **Cost Router** — 70% T2/T3 tier (cost savings), 30% T1 (complex tasks). 33 validated models across 4 tiers.
 - **Heartbeat Sync** — 6 self-improvement loops: Episodic Memory, Auto Skill Drafting, Self Evaluation, Security Scan, Cost Optimization, Loop Integration
 - **SentientForge** — Continuous ACS optimization running 24/7 (40+ experiments, ACS 0.9625)
 - **ACP Marketplace** — Virtuals.io integration. Code/Research/Strategy at 10-25 $VIRTUAL
@@ -150,9 +150,13 @@ Cost-optimized swarm intelligence with multi-model consensus, sovereign economic
 
 | Tier | Models | Use For |
 |------|--------|---------|
-| **T1** | kimi-k2.5, deepseek-v3.1:671b, glm-5.1 | Complex synthesis, planning, code |
-| **T2** | minimax-m2.5, qwen3-coder:480b, mistral-large-3:675b | Analysis, validation, research |
-| **T3** | gemma4:31b, devstral-small-2:24b, ministral-3 | Formatting, simple transforms |
+| **T1** | kimi-k2.5, deepseek-v3.1:671b, deepseek-v3.2, glm-5.1, glm-5, qwen3-coder:480b, qwen3-coder-next, mistral-large-3:675b, cogito-2.1:671b, nemotron-3-super, gpt-oss:120b | Complex synthesis, planning, code, deep reasoning |
+| **T2** | minimax-m2.5, minimax-m2.7, minimax-m2.1, minimax-m2, qwen3-vl:235b, qwen3-vl:235b-instruct, gemma4:31b, devstral-2:123b, gpt-oss:20b | Analysis, validation, research, balanced tasks |
+| **T3** | gemma3:27b, gemma3:12b, gemma3:4b, ministral-3:14b, ministral-3:8b, ministral-3:3b, nemotron-3-nano:30b, devstral-small-2:24b, glm-4.7 | Formatting, simple transforms, cost savings |
+| **Think** | kimi-k2:1t, kimi-k2-thinking | Extended reasoning (may need cold start) |
+
+**33 working models** validated on Ollama Cloud (requires `:cloud` suffix for local proxy routing).
+2 thinking models (kimi-k2:1t, kimi-k2-thinking) may require cold start on first call.
 
 ---
 

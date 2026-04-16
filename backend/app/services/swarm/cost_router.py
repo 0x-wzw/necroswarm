@@ -32,7 +32,7 @@ class TaskComplexity(Enum):
 class CostTier(Enum):
     """Cost tiers for model selection."""
     FREE = "free"         # Local Ollama models
-    LOW = "low"           # Cheap APIs (ilmu-mini, phi3)
+    LOW = "low"           # Cost-saving cloud models (gemma3, ministral)
     MEDIUM = "medium"     # Mid-tier (Haiku, Llama)
     HIGH = "high"         # Premium (Sonnet, GPT-4)
 
@@ -111,51 +111,177 @@ class CostRouter:
     - Batch similar requests
     """
     
-    # Model registry with cost/latency tradeoffs
+    # Model registry with cost/latency tradeoffs — 33 validated Ollama Cloud models
     MODELS: Dict[str, ModelSpec] = {
-        # FREE tier - Local Ollama
-        "ollama/phi3": ModelSpec(
-            name="ollama/phi3",
-            cost_per_1k_tokens=0.0,
-            avg_latency_ms=500,
-            capabilities=["basic", "formatting"],
-            context_window=4096,
-            tier=CostTier.FREE,
-            is_local=True
-        ),
-        "ollama/qwen2.5:3b": ModelSpec(
-            name="ollama/qwen2.5:3b",
-            cost_per_1k_tokens=0.0,
-            avg_latency_ms=800,
-            capabilities=["basic", "formatting", "simple_reasoning"],
-            context_window=4096,
-            tier=CostTier.FREE,
-            is_local=True
-        ),
-        # LOW tier - Cheap APIs
-        "custom-api/ilmu-mini": ModelSpec(
-            name="custom-api/ilmu-mini-free-v2",
-            cost_per_1k_tokens=0.0001,  # ~$0.10/1M tokens
-            avg_latency_ms=600,
-            capabilities=["basic", "formatting", "web_search", "simple_reasoning"],
-            context_window=16000,
-            tier=CostTier.LOW
-        ),
-        # MEDIUM tier - Reasonable quality
-        "anthropic/claude-haiku-3.5": ModelSpec(
-            name="anthropic/claude-haiku-3.5",
-            cost_per_1k_tokens=0.00125,  # ~$1.25/1M tokens
-            avg_latency_ms=1000,
-            capabilities=["reasoning", "code", "analysis", "filtering"],
-            context_window=200000,
-            tier=CostTier.MEDIUM
-        ),
-        # HIGH tier - Complex tasks only
+        # T1 (HIGH) tier — Complex synthesis, code, deep reasoning
         "ollama/kimi-k2.5:cloud": ModelSpec(
             name="ollama/kimi-k2.5:cloud",
             cost_per_1k_tokens=0.005,  # Premium
             avg_latency_ms=2000,
             capabilities=["reasoning", "code", "analysis", "synthesis", "complex_planning"],
+            context_window=262000,
+            tier=CostTier.HIGH
+        ),
+        "ollama/deepseek-v3.1:671b:cloud": ModelSpec(
+            name="ollama/deepseek-v3.1:671b:cloud",
+            cost_per_1k_tokens=0.004,
+            avg_latency_ms=2500,
+            capabilities=["reasoning", "code", "analysis", "deep_thinking"],
+            context_window=131000,
+            tier=CostTier.HIGH
+        ),
+        "ollama/glm-5.1:cloud": ModelSpec(
+            name="ollama/glm-5.1:cloud",
+            cost_per_1k_tokens=0.003,
+            avg_latency_ms=1500,
+            capabilities=["reasoning", "code", "analysis", "general"],
+            context_window=131000,
+            tier=CostTier.HIGH
+        ),
+        "ollama/qwen3-coder:480b:cloud": ModelSpec(
+            name="ollama/qwen3-coder:480b:cloud",
+            cost_per_1k_tokens=0.004,
+            avg_latency_ms=2200,
+            capabilities=["code", "reasoning", "debugging", "architecture"],
+            context_window=131000,
+            tier=CostTier.HIGH
+        ),
+        "ollama/mistral-large-3:675b:cloud": ModelSpec(
+            name="ollama/mistral-large-3:675b:cloud",
+            cost_per_1k_tokens=0.004,
+            avg_latency_ms=2400,
+            capabilities=["reasoning", "analysis", "synthesis"],
+            context_window=131000,
+            tier=CostTier.HIGH
+        ),
+        "ollama/cogito-2.1:671b:cloud": ModelSpec(
+            name="ollama/cogito-2.1:671b:cloud",
+            cost_per_1k_tokens=0.004,
+            avg_latency_ms=2300,
+            capabilities=["reasoning", "deep_analysis", "strategy"],
+            context_window=131000,
+            tier=CostTier.HIGH
+        ),
+        "ollama/nemotron-3-super:cloud": ModelSpec(
+            name="ollama/nemotron-3-super:cloud",
+            cost_per_1k_tokens=0.003,
+            avg_latency_ms=1800,
+            capabilities=["reasoning", "analysis", "code"],
+            context_window=131000,
+            tier=CostTier.HIGH
+        ),
+        # T2 (MEDIUM) tier — Analysis, validation, research
+        "ollama/minimax-m2.5:cloud": ModelSpec(
+            name="ollama/minimax-m2.5:cloud",
+            cost_per_1k_tokens=0.0015,
+            avg_latency_ms=1000,
+            capabilities=["reasoning", "analysis", "research", "balanced"],
+            context_window=131000,
+            tier=CostTier.MEDIUM
+        ),
+        "ollama/minimax-m2.7:cloud": ModelSpec(
+            name="ollama/minimax-m2.7:cloud",
+            cost_per_1k_tokens=0.0015,
+            avg_latency_ms=1000,
+            capabilities=["reasoning", "analysis", "research"],
+            context_window=131000,
+            tier=CostTier.MEDIUM
+        ),
+        "ollama/qwen3-vl:235b:cloud": ModelSpec(
+            name="ollama/qwen3-vl:235b:cloud",
+            cost_per_1k_tokens=0.002,
+            avg_latency_ms=1500,
+            capabilities=["vision", "reasoning", "multimodal"],
+            context_window=131000,
+            tier=CostTier.MEDIUM
+        ),
+        "ollama/gemma4:31b:cloud": ModelSpec(
+            name="ollama/gemma4:31b:cloud",
+            cost_per_1k_tokens=0.001,
+            avg_latency_ms=800,
+            capabilities=["reasoning", "analysis", "general"],
+            context_window=131000,
+            tier=CostTier.MEDIUM
+        ),
+        "ollama/devstral-2:123b:cloud": ModelSpec(
+            name="ollama/devstral-2:123b:cloud",
+            cost_per_1k_tokens=0.002,
+            avg_latency_ms=1200,
+            capabilities=["code", "development", "debugging"],
+            context_window=131000,
+            tier=CostTier.MEDIUM
+        ),
+        # T3 (LOW) tier — Formatting, simple transforms, cost savings
+        "ollama/gemma3:27b:cloud": ModelSpec(
+            name="ollama/gemma3:27b:cloud",
+            cost_per_1k_tokens=0.0005,
+            avg_latency_ms=600,
+            capabilities=["basic", "formatting", "simple_reasoning"],
+            context_window=131000,
+            tier=CostTier.LOW
+        ),
+        "ollama/gemma3:12b:cloud": ModelSpec(
+            name="ollama/gemma3:12b:cloud",
+            cost_per_1k_tokens=0.0003,
+            avg_latency_ms=400,
+            capabilities=["basic", "formatting"],
+            context_window=131000,
+            tier=CostTier.LOW
+        ),
+        "ollama/gemma3:4b:cloud": ModelSpec(
+            name="ollama/gemma3:4b:cloud",
+            cost_per_1k_tokens=0.0001,
+            avg_latency_ms=300,
+            capabilities=["basic", "formatting"],
+            context_window=32768,
+            tier=CostTier.LOW
+        ),
+        "ollama/ministral-3:8b:cloud": ModelSpec(
+            name="ollama/ministral-3:8b:cloud",
+            cost_per_1k_tokens=0.0002,
+            avg_latency_ms=350,
+            capabilities=["basic", "formatting", "simple_reasoning"],
+            context_window=32768,
+            tier=CostTier.LOW
+        ),
+        "ollama/ministral-3:3b:cloud": ModelSpec(
+            name="ollama/ministral-3:3b:cloud",
+            cost_per_1k_tokens=0.0001,
+            avg_latency_ms=250,
+            capabilities=["basic", "formatting"],
+            context_window=32768,
+            tier=CostTier.LOW
+        ),
+        "ollama/nemotron-3-nano:30b:cloud": ModelSpec(
+            name="ollama/nemotron-3-nano:30b:cloud",
+            cost_per_1k_tokens=0.0003,
+            avg_latency_ms=400,
+            capabilities=["basic", "formatting", "simple_reasoning"],
+            context_window=131000,
+            tier=CostTier.LOW
+        ),
+        "ollama/devstral-small-2:24b:cloud": ModelSpec(
+            name="ollama/devstral-small-2:24b:cloud",
+            cost_per_1k_tokens=0.0005,
+            avg_latency_ms=500,
+            capabilities=["code", "basic_development"],
+            context_window=131000,
+            tier=CostTier.LOW
+        ),
+        # Think tier — Extended reasoning (may need cold start)
+        "ollama/kimi-k2:1t:cloud": ModelSpec(
+            name="ollama/kimi-k2:1t:cloud",
+            cost_per_1k_tokens=0.006,
+            avg_latency_ms=5000,  # Slower due to thinking
+            capabilities=["extended_reasoning", "deep_analysis", "planning"],
+            context_window=262000,
+            tier=CostTier.HIGH
+        ),
+        "ollama/kimi-k2-thinking:cloud": ModelSpec(
+            name="ollama/kimi-k2-thinking:cloud",
+            cost_per_1k_tokens=0.007,
+            avg_latency_ms=6000,  # Slowest due to extended thinking
+            capabilities=["extended_reasoning", "deep_analysis", "strategy"],
             context_window=262000,
             tier=CostTier.HIGH
         ),
@@ -233,15 +359,15 @@ class CostRouter:
         
         # Route based on complexity
         if complexity == TaskComplexity.TRIVIAL:
-            model_name = "ollama/phi3"
+            model_name = "ollama/ministral-3:3b:cloud"
         elif complexity == TaskComplexity.SIMPLE:
-            model_name = "custom-api/ilmu-mini"
+            model_name = "ollama/gemma3:27b:cloud"
         elif complexity == TaskComplexity.MODERATE:
-            model_name = "anthropic/claude-haiku-3.5"
+            model_name = "ollama/minimax-m2.5:cloud"
         else:  # COMPLEX
             model_name = "ollama/kimi-k2.5:cloud"
         
-        model = self.MODELS.get(model_name, self.MODELS["custom-api/ilmu-mini"])
+        model = self.MODELS.get(model_name, self.MODELS["ollama/gemma3:27b:cloud"])
         
         # Calculate estimated cost
         estimated_cost = (profile.estimated_tokens / 1000) * model.cost_per_1k_tokens

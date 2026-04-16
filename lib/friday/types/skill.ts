@@ -1,5 +1,5 @@
 /**
- * Core type definitions for the F.R.I.D.A.Y skill system.
+ * Core type definitions for the NECROSWARM skill system.
  *
  * Inspired by Paperclip's skill injection and plugin SDK patterns:
  * - Skills are self-describing units of capability

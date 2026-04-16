@@ -72,11 +72,13 @@ Extended heartbeat with 6 self-improvement loops:
 {
   "necroswarm": {
     "swarm": {
-      "agents": ["october", "halloween", "octoberxin"],
+      "agents": ["dynamic"],
       "modelRouting": {
         "t1": "ollama/kimi-k2.5:cloud",
-        "t2": "custom-api-staging-ytlailabs-tech/ilmu-mini-free-v2",
-        "targetFreeTierPercent": 70
+        "t2": "ollama/minimax-m2.5:cloud",
+        "t3": "ollama/ministral-3:8b:cloud",
+        "think": "ollama/kimi-k2:1t:cloud",
+        "targetCostSavingsPercent": 70
       }
     },
     "tokenEconomy": {
@@ -94,31 +96,36 @@ Extended heartbeat with 6 self-improvement loops:
 
 - **Swarm ACS:** 0.9625 (target >0.90)
 - **Cost/ACS:** ~$0.01
-- **Free Tier %:** ~70%
-- **SentientForge:** Running 24/7 (PID 76647)
+- **Free Tier %:** ~70% (T2/T3 cost savings)
+- **SentientForge:** Running 24/7
 
 ---
 
-*Version: 2.0.0 | March 2026*
+*Version: 1.5.0 | April 2026*
 *Part of the 0x-wzw Swarm Ecosystem*
 
 ## Detailed Architecture
 
-### Swarm Trinity
-| Agent | Role | Primary Model | Fallback Model |
-|-------|------|---------------|----------------|
-| October | Orchestrator/Diplomat | kimi-k2.5:cloud (262K) | ilmu-mini-free-v2 |
-| Halloween | Code Architect | kimi-k2.5:cloud (262K) | ilmu-mini-free-v2 |
-| OctoberXin | Research Analyst | kimi-k2.5:cloud (262K) | ilmu-mini-free-v2 |
+### Dynamic Model Routing (33 validated models)
 
-### Cost Router Logic
+| Tier | Models | Role |
+|------|--------|------|
+| T1 (Premium) | kimi-k2.5:cloud, deepseek-v3.1:671b:cloud, glm-5.1:cloud, qwen3-coder:480b:cloud, mistral-large-3:675b:cloud, cogito-2.1:671b:cloud | Complex synthesis, code, deep reasoning |
+| T2 (Balanced) | minimax-m2.5:cloud, minimax-m2.7:cloud, qwen3-vl:235b:cloud, gemma4:31b:cloud, devstral-2:123b:cloud, gpt-oss:20b:cloud | Analysis, validation, research |
+| T3 (Efficient) | gemma3:27b:cloud, gemma3:12b:cloud, gemma3:4b:cloud, ministral-3:14b:cloud, ministral-3:8b:cloud, ministral-3:3b:cloud | Formatting, simple transforms |
+| Think | kimi-k2:1t:cloud, kimi-k2-thinking:cloud | Extended reasoning (may need cold start) |
+
 ```
-IF task.complexity == "high" OR context_required > 16K:
-    USE kimi-k2.5:cloud (premium)
-ELSE IF task.requires_research:
-    USE ilmu-mini-free-v2 (free)
+IF task.requires_extended_thinking:
+    USE kimi-k2:1t:cloud OR kimi-k2-thinking:cloud
+ELIF task.complexity == "high" OR context_required > 16K:
+    USE kimi-k2.5:cloud (T1, 262K context)
+ELIF task.requires_code OR task.requires_deep_reasoning:
+    USE deepseek-v3.1:671b:cloud OR qwen3-coder:480b:cloud (T1)
+ELIF task.requires_vision:
+    USE qwen3-vl:235b:cloud (T2)
 ELSE:
-    USE ilmu-mini-free-v2 (free)
+    USE gemma3:27b:cloud OR ministral-3:8b:cloud (T3, minimal cost)
 ```
 
 ### Token Economy
@@ -155,7 +162,7 @@ COST_ROUTE({
     taskType: "formatting",
     complexity: "simple"
 })
-# Returns: ilmu-mini-free-v2 (free)
+# Returns: ministral-3:8b:cloud (T3, minimal cost)
 ```
 
 ### Token Distribution
@@ -166,12 +173,12 @@ TOKEN_ECONOMY_SPLIT(revenue=100)
 
 ## Evolution from Paperclip
 
-| Aspect | Paperclip (v1.0) | SovereignStack (v2.0) |
-|--------|------------------|----------------------|
+| Aspect | Paperclip (v1.0) | NECROSWARM (v1.5) |
+|--------|------------------|---------------------|
 | Architecture | Company-centric | Swarm-native |
-| Optimization | Cost control | ACS optimization |
+| Optimization | Cost control | Dynamic model routing (33 models, 4 tiers) |
 | Economics | SaaS | Tokenized (Web3) |
-| Model Routing | Static tiers | Dynamic (70/30) |
+| Model Routing | Static 2-tier | Dynamic 4-tier (T1/T2/T3/Think) |
 | Self-Improvement | Manual | SentientForge continuous |
 | Monetization | Internal | ACP marketplace |
 
@@ -203,4 +210,4 @@ MIT — See LICENSE file
 
 *Part of the 0x-wzw Swarm Ecosystem*  
 *Evolution of Paperclip Orchestration*  
-*Version: 2.0.0 | March 2026*
+*Version: 1.5.0 | April 2026*

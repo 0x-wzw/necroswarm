@@ -1,7 +1,7 @@
 # Swarm Delegation — NECROSWARM Module
 
 ## Overview
-Part of the F.R.I.D.A.Y. skill architecture. Handles multi-agent spawning decisions, context management, and token optimization for swarm orchestration.
+Part of the NECROSWARM skill architecture. Handles multi-agent spawning decisions, context management, and token optimization for swarm orchestration.
 
 ## Core Question
 Should I spawn a sub-agent, or handle this in the current context?

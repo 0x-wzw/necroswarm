@@ -59,13 +59,13 @@ agents:
     cooldown_ms: 500
     
   - id: agent-002
-    model: anthropic/claude-haiku-3.5
+    model: ollama/minimax-m2.5:cloud
     role: executor
     max_concurrency: 4
     cooldown_ms: 200
     
   - id: agent-003
-    model: anthropic/claude-haiku-3.5
+    model: ollama/minimax-m2.5:cloud
     role: executor
     max_concurrency: 4
     cooldown_ms: 200
@@ -177,7 +177,7 @@ rings:
     id: ring-2
     count: 12
     role: worker
-    model: anthropic/claude-haiku-3.5
+    model: ollama/minimax-m2.5:cloud
     max_concurrency: 8
     cooldown_ms: 200
     
@@ -301,7 +301,7 @@ levels:
     id: level-2
     count: 12
     role: district-coordinator
-    model: anthropic/claude-haiku-3.5
+    model: ollama/minimax-m2.5:cloud
     max_concurrency: 8
     parent: level-1
     
@@ -309,7 +309,7 @@ levels:
     id: level-3
     count: 48
     role: team-agent
-    model: anthropic/claude-haiku-3.5
+    model: ollama/minimax-m2.5:cloud
     max_concurrency: 16
     parent: level-2
 
@@ -402,7 +402,7 @@ branches:
         role: researcher
         max_concurrency: 2
       - id: branch-a-002
-        model: anthropic/claude-haiku-3.5
+        model: ollama/minimax-m2.5:cloud
         role: executor
         max_concurrency: 4
     replicas:
@@ -527,7 +527,7 @@ agents:
     region: apac
 
   - id: eu-executor-001
-    model: anthropic/claude-haiku-3.5
+    model: ollama/minimax-m2.5:cloud
     role: eu-executor
     max_concurrency: 4
     region: eu
@@ -658,7 +658,7 @@ tier:
       - id: district-a1
         type: hierarchical
         nodes: 60
-        model: anthropic/claude-haiku-3.5
+        model: ollama/minimax-m2.5:cloud
         port: 8600
         protocol: forest-model
         sync_interval: 3.0
@@ -666,7 +666,7 @@ tier:
       - id: district-a2
         type: hierarchical
         nodes: 60
-        model: anthropic/claude-haiku-3.5
+        model: ollama/minimax-m2.5:cloud
         port: 8601
 
       # ... more districts

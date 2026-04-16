@@ -1,7 +1,7 @@
 {
   "name": "friday-mark1-skills",
   "version": "0.1.0",
-  "description": "F.R.I.D.A.Y Mark-1 — Skill system for autonomous AI agent orchestration",
+  "description": "NECROSWARM — Skill system for autonomous AI agent orchestration",
   "type": "module",
   "main": "src/index.ts",
   "scripts": {
