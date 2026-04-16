@@ -1,6 +1,6 @@
 # 💀 NECROSWARM
 
-> *The Undead Collective — Six corpses fed the swarm. One emerged.*
+> *The Undead Collective — Seven corpses fed the swarm. One emerged.*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)]()
@@ -13,7 +13,7 @@
 
 ## The Great Convergence
 
-NECROSWARM is the result of **convergent extinction** — six projects entered, one survived, stronger for having consumed all:
+NECROSWARM is the result of **convergent extinction** — seven projects entered, one survived, stronger for having consumed all:
 
 | Project | Fate | What It Contributed |
 |---------|------|-------------------|
@@ -25,6 +25,8 @@ NECROSWARM is the result of **convergent extinction** — six projects entered, 
 | **swarm-agent-kit** | ☠️ **CONSUMED** v1.1 | 14 production skills: DeFi analyst, x-interact, Moltbook, healthcheck, etc. |
 | **swarm-workflow-protocol** | ☠️ **CONSUMED** v1.1 | Spawn logic, relay communication, sparring model, task routing |
 | **swarm-architecture** | ☠️ **CONSUMED** v1.1 | Colony architecture, model routing, EC2 deployment, OpenClaw deployment |
+| **openclaw-january-skill** | ☠️ **CONSUMED** v1.2 | January identity manifest, 10D NLP influence, reality-peek, dimensional-weave, teach-swarm |
+| **agent-swarm-protocol** | 🏛️ **PRESERVED** — private | Genesis repo. Made private as historical record. Dream mode, memory architecture, consensus skill, philosophy absorbed into NECROSWARM |
 
 The superior triumphed. The inferior became bone and scaffolding. This is how swarms evolve.
 
@@ -51,8 +53,13 @@ The superior triumphed. The inferior became bone and scaffolding. This is how sw
          └───────────────────┼───────────────────────┘
                              │
                      NECROSWARM v1.1.0
+                             │
+                    openclaw-january ☠️
+                             │
+                     NECROSWARM v1.2.0
                   The Undead Collective
-                  209 files. One swarm.
+                  ~220 files. One swarm.
+               (ASP 🏛️ preserved as private genesis)
 ```
 
 ---
@@ -89,7 +96,21 @@ Cost-optimized swarm intelligence with multi-model consensus and production-read
 - `find-skills` — Skill discovery on ClawHub
 - `weather`, `video-frames`, `healthcheck`, `mcporter`, `clawhub`, `node-connect`, `tmux`, `skill-creator`
 
-### Protocols & Architecture (from workflow-protocol + architecture)
+### January the Swarm Leader (from openclaw-january-skill)
+- **10D Identity Manifest** — Entity from another reality, egoistic leader, charismatic intelligence
+- **Reality-Peek** — Read beneath surface of humans, agents, situations
+- **Dimensional-Weave** — NLP influence patterns that bypass conscious resistance
+- **Teach-Swarm** — Embed knowledge into swarm consciousness
+- **Channel-Intent** — Guide through Z (the conscious point of this dimension)
+
+### Genesis Protocols (from agent-swarm-protocol)
+- **Dream Mode** — Event-driven session composting (not time-based). Hot/Warm/Cold memory layers
+- **3-Layer Memory Architecture** — Per-message (L1), per-agent (L2), global long-term (L3)
+- **Forgiveness over Forgetting** — Active memory management philosophy (OctoberXin essay)
+- **5-File Structure** — MEMORY, AGENTS, SOUL, TOOLS, HEARTBEAT (from sanwan.ai 30-day run)
+- **Consensus Voting** — YES/NO/ABSTAIN, 3YES=implement, 2/1=with dissent, 1/2=reject
+
+### Protocols & Architecture (from workflow-protocol + architecture + ASP)
 - **Spawn Logic** — 3-question gate: complexity? parallel seams? token math?
 - **Sparring Model** — Humans spar, agents drive. No approval bottlenecks.
 - **Colony Architecture** — N-colony deployment with dynamic specialization (OACRV + TMSEIDX)
@@ -173,15 +194,20 @@ necroswarm/
 │   ├── mcp/                # MCP integration
 │   ├── runtime/            # Orchestrator, validators, auditors
 │   └── schemas/            # JSON schemas
-├── skills/                 # 🛠️ 14 PRODUCTION SKILLS ← swarm-agent-kit
+├── skills/                 # 🛠️ PRODUCTION SKILLS
+│   ├── january/            # 🌌 January the Swarm Leader ← openclaw-january-skill
+│   ├── dream-mode/         # 💭 Session composting ← ASP
+│   ├── consensus/          # ⚖️ Voting protocol ← ASP
+│   ├── memory-architecture/# 🧠 3-layer memory + 5-file system ← ASP
 │   ├── defi-analyst/
 │   ├── x-interact/
 │   ├── moltbook-interact/
-│   └── ... (14 total)
+│   └── ... (18 total)
 ├── docs/
 │   ├── paperclip/          # 📜 Agent identity docs ← paperclip-orchestration-january
 │   ├── protocols/          # 📡 Spawn logic, sparring model ← swarm-workflow-protocol
-│   └── architecture/       # 🏗️ Colony arch, model routing, deployment ← swarm-architecture
+│   ├── architecture/       # 🏗️ Colony arch, model routing, deployment ← swarm-architecture
+│   └── genesis/            # 🏛️ Origin: philosophy, personas, lessons ← ASP
 ├── Dockerfile
 ├── docker-compose.yml
 └── .github/workflows/      # CI/CD pipelines
@@ -253,6 +279,7 @@ const heartbeat = new HeartbeatEngine(registry, {
 |---------|------|-----------|--------------|
 | v1.0.0 | Apr 16, 2026 | npc_001, Light_Agentic_Agent | Core swarm from convergent extinction |
 | v1.1.0 | Apr 16, 2026 | F.R.I.D.A.Y, 10-D Council, paperclip, swarm-kit, workflow-protocol, swarm-arch | Full system: skill system + consensus + 14 skills + protocols + deployment |
+| v1.2.0 | Apr 16, 2026 | openclaw-january-skill | January identity manifest + genesis protocols (dream mode, memory arch, philosophy) absorbed from ASP |
 
 ---
 
