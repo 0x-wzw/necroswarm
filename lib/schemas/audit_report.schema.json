@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://light-agentic-agent/schemas/audit_report.schema.json",
+  "title": "AuditReport",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["audit_type", "status", "score", "findings", "recommendations"],
+  "properties": {
+    "audit_type": {
+      "type": "string",
+      "enum": ["spec", "quality", "risk", "budget"]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["pass", "fail", "warn"]
+    },
+    "score": { "type": "number", "minimum": 0, "maximum": 1 },
+    "findings": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "recommendations": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}

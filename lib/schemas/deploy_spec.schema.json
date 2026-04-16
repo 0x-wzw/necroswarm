@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://light-agentic-agent/schemas/deploy_spec.schema.json",
+  "title": "DeploymentSpec",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["deploy_id", "repo", "branch", "target", "require_approval"],
+  "properties": {
+    "deploy_id": { "type": "string", "minLength": 1 },
+    "repo": { "type": "string", "minLength": 3 },
+    "branch": { "type": "string", "minLength": 1 },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["env", "host_env_ref", "registry_env_ref"],
+      "properties": {
+        "env": { "type": "string", "enum": ["staging", "production"] },
+        "host_env_ref": { "type": "string", "minLength": 1 },
+        "registry_env_ref": { "type": "string", "minLength": 1 }
+      }
+    },
+    "require_approval": { "type": "boolean" }
+  }
+}

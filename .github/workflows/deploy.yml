@@ -1,0 +1,54 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Target environment"
+        required: true
+        default: staging
+        type: choice
+        options:
+          - staging
+          - production
+      branch:
+        description: "Branch to deploy"
+        required: true
+        default: main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.branch }}
+
+      - name: Trigger deployment agent
+        env:
+          AGENT_DEPLOY_URL: ${{ secrets.AGENT_DEPLOY_URL }}
+          DEPLOY_APPROVAL_TOKEN: ${{ secrets.DEPLOY_APPROVAL_TOKEN }}
+        run: |
+          RESPONSE=$(curl -sf -X POST "${AGENT_DEPLOY_URL}/api/deploy" \
+            -H "Content-Type: application/json" \
+            -H "X-Deploy-Approval: ${DEPLOY_APPROVAL_TOKEN}" \
+            -d "{
+              \"deploy_id\": \"${{ github.run_id }}\",
+              \"repo\": \"${{ github.repository }}\",
+              \"branch\": \"${{ inputs.branch }}\",
+              \"target\": {
+                \"env\": \"${{ inputs.environment }}\",
+                \"host_env_ref\": \"DEPLOY_HOST\",
+                \"registry_env_ref\": \"REGISTRY_URL\"
+              },
+              \"require_approval\": true
+            }")
+          echo "Deployment response: $RESPONSE"
+          STATUS=$(echo "$RESPONSE" | jq -r '.status')
+          if [ "$STATUS" != "success" ] && [ "$STATUS" != "rolled_back" ]; then
+            echo "Deployment failed with status: $STATUS"
+            exit 1
+          fi
+          echo "Deployment completed with status: $STATUS"

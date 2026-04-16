@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://light-agentic-agent/schemas/deploy_result.schema.json",
+  "title": "DeploymentResult",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["deploy_id", "run_id", "overall", "steps", "triggered_at", "completed_at"],
+  "properties": {
+    "deploy_id": { "type": "string", "minLength": 1 },
+    "run_id": { "type": "string", "minLength": 1 },
+    "overall": {
+      "type": "string",
+      "enum": ["success", "failure", "rolled_back"]
+    },
+    "steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["step", "status", "output", "duration_ms"],
+        "properties": {
+          "step": { "type": "string", "minLength": 1 },
+          "status": { "type": "string", "enum": ["ok", "failed", "skipped"] },
+          "output": { "type": "string" },
+          "duration_ms": { "type": "number", "minimum": 0 }
+        }
+      }
+    },
+    "triggered_at": { "type": "string", "minLength": 1 },
+    "completed_at": { "type": "string", "minLength": 1 }
+  }
+}

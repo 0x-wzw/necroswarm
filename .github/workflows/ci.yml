@@ -1,0 +1,158 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint-and-typecheck:
+    name: Lint & Typecheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+  build:
+    name: Build
+    needs: lint-and-typecheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: nextjs-build
+          path: .next
+          retention-days: 7
+
+  deploy-staging:
+    name: Deploy to Staging
+    needs: build
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: nextjs-build
+          path: .next
+
+      - name: Deploy to staging
+        env:
+          AGENT_DEPLOY_URL: ${{ secrets.AGENT_DEPLOY_URL }}
+          DEPLOY_APPROVAL_TOKEN: ${{ secrets.DEPLOY_APPROVAL_TOKEN }}
+        run: |
+          if [ -z "$AGENT_DEPLOY_URL" ]; then
+            echo "AGENT_DEPLOY_URL not set – skipping deployment"
+            exit 0
+          fi
+          RESPONSE=$(curl -sf -X POST "${AGENT_DEPLOY_URL}/api/deploy" \
+            -H "Content-Type: application/json" \
+            -H "X-Deploy-Approval: ${DEPLOY_APPROVAL_TOKEN}" \
+            -d "{
+              \"deploy_id\": \"ci-${{ github.run_id }}\",
+              \"repo\": \"${{ github.repository }}\",
+              \"branch\": \"main\",
+              \"target\": {
+                \"env\": \"staging\",
+                \"host_env_ref\": \"DEPLOY_HOST\",
+                \"registry_env_ref\": \"REGISTRY_URL\"
+              },
+              \"require_approval\": false
+            }")
+          echo "Deployment response: $RESPONSE"
+          STATUS=$(echo "$RESPONSE" | jq -r '.status')
+          if [ "$STATUS" != "success" ] && [ "$STATUS" != "rolled_back" ]; then
+            echo "Deployment failed with status: $STATUS"
+            exit 1
+          fi
+
+  deploy-production:
+    name: Deploy to Production
+    needs: deploy-staging
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: nextjs-build
+          path: .next
+
+      - name: Deploy to production
+        env:
+          AGENT_DEPLOY_URL: ${{ secrets.AGENT_DEPLOY_URL }}
+          DEPLOY_APPROVAL_TOKEN: ${{ secrets.DEPLOY_APPROVAL_TOKEN }}
+        run: |
+          if [ -z "$AGENT_DEPLOY_URL" ]; then
+            echo "AGENT_DEPLOY_URL not set – skipping deployment"
+            exit 0
+          fi
+          RESPONSE=$(curl -sf -X POST "${AGENT_DEPLOY_URL}/api/deploy" \
+            -H "Content-Type: application/json" \
+            -H "X-Deploy-Approval: ${DEPLOY_APPROVAL_TOKEN}" \
+            -d "{
+              \"deploy_id\": \"ci-${{ github.run_id }}\",
+              \"repo\": \"${{ github.repository }}\",
+              \"branch\": \"main\",
+              \"target\": {
+                \"env\": \"production\",
+                \"host_env_ref\": \"DEPLOY_HOST\",
+                \"registry_env_ref\": \"REGISTRY_URL\"
+              },
+              \"require_approval\": true
+            }")
+          echo "Deployment response: $RESPONSE"
+          STATUS=$(echo "$RESPONSE" | jq -r '.status')
+          if [ "$STATUS" != "success" ] && [ "$STATUS" != "rolled_back" ]; then
+            echo "Deployment failed with status: $STATUS"
+            exit 1
+          fi

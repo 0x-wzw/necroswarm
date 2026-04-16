@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://light-agentic-agent/schemas/bot_package.schema.json",
+  "title": "BotPackage",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "run_id",
+    "task_id",
+    "model",
+    "instructions",
+    "skills",
+    "io_schemas",
+    "rubric",
+    "tests",
+    "tools"
+  ],
+  "properties": {
+    "run_id": { "type": "string" },
+    "task_id": { "type": "string" },
+    "model": { "type": "string" },
+    "instructions": { "type": "string" },
+    "skills": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["skill_id", "prompt", "tools_allowed"],
+        "properties": {
+          "skill_id": { "type": "string" },
+          "prompt": { "type": "string" },
+          "tools_allowed": {
+            "type": "array",
+            "items": { "type": "string" },
+            "uniqueItems": true
+          }
+        }
+      }
+    },
+    "io_schemas": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["input", "output"],
+      "properties": {
+        "input": { "type": "string" },
+        "output": { "type": "string" }
+      }
+    },
+    "rubric": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "tests": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "assertion"],
+        "properties": {
+          "name": { "type": "string" },
+          "assertion": { "type": "string" }
+        }
+      }
+    },
+    "tools": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mcp_scope"],
+      "properties": {
+        "mcp_scope": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["allow"],
+          "properties": {
+            "allow": {
+              "type": "array",
+              "items": { "type": "string" },
+              "uniqueItems": true
+            }
+          }
+        }
+      }
+    }
+  }
+}
