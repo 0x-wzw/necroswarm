@@ -1,0 +1,76 @@
+{
+  "name": "10-D Council",
+  "version": "1.0.0",
+  "chair": "October",
+  "consensus_method": "weighted_majority",
+  
+  "council_members": {
+    "cognitive_leads": [
+      {
+        "id": "kimi",
+        "name": "Kimi K2.5",
+        "model": "ollama-cloud/kimi-k2.5",
+        "tier": "T1",
+        "vote_power": 3,
+        "weight": 1.0
+      },
+      {
+        "id": "claude",
+        "name": "Claude Opus",
+        "model": "anthropic/claude-opus-4-6",
+        "tier": "T1",
+        "vote_power": 3,
+        "weight": 1.0
+      }
+    ],
+    "research_synthesizers": [
+      {
+        "id": "deepseek",
+        "name": "DeepSeek V3.2",
+        "model": "ollama-cloud/deepseek-v3.2",
+        "tier": "T2",
+        "vote_power": 2,
+        "weight": 0.8
+      },
+      {
+        "id": "glm",
+        "name": "GLM-5",
+        "model": "ollama-cloud/glm-5",
+        "tier": "T2",
+        "vote_power": 2,
+        "weight": 0.8
+      }
+    ],
+    "execution_specialists": [
+      {
+        "id": "qwen",
+        "name": "Qwen 2.5",
+        "model": "ollama/qwen2.5:0.5b",
+        "tier": "T3",
+        "vote_power": 1,
+        "weight": 0.5
+      }
+    ]
+  },
+  
+  "council_rules": {
+    "quorum": 0.6,
+    "supermajority": 0.75,
+    "escalation_triggers": [
+      "confidence_below_threshold",
+      "tie_cannot_resolve",
+      "high_stakes_claim"
+    ]
+  },
+  
+  "task_routing": {
+    "truth_validation": {
+      "required_members": ["kimi", "deepseek", "glm"],
+      "consensus_threshold": 0.67
+    },
+    "code_architecture": {
+      "required_members": ["kimi", "claude"],
+      "consensus_threshold": 0.6
+    }
+  }
+}

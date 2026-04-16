@@ -1,0 +1,56 @@
+{
+  "skills": {
+    "tavily-mcp": {
+      "name": "Tavily MCP",
+      "description": "Web search via Tavily MCP",
+      "repo": "https://github.com/your-org/tavily-mcp-skill.git",
+      "status": "ready",
+      "category": "search",
+      "author": "January the Swarm Leader",
+      "version": "0.1.0",
+      "installed": false
+    },
+    "context7": {
+      "name": "Context7",
+      "description": "Library documentation injection",
+      "repo": "https://github.com/your-org/context7-skill.git",
+      "status": "planned",
+      "category": "development",
+      "author": "January the Swarm Leader",
+      "version": "0.0.0",
+      "installed": false
+    },
+    "omni-route": {
+      "name": "Omni-Route",
+      "description": "Multi-provider API routing",
+      "repo": "https://github.com/your-org/omni-route-skill.git",
+      "status": "planned",
+      "category": "utilities",
+      "author": "January the Swarm Leader",
+      "version": "0.0.0",
+      "installed": false
+    },
+    "task-master": {
+      "name": "Task Master",
+      "description": "AI project manager",
+      "repo": "https://github.com/your-org/task-master-skill.git",
+      "status": "planned",
+      "category": "workflow",
+      "author": "January the Swarm Leader",
+      "version": "0.0.0",
+      "installed": false
+    }
+  },
+  "categories": {
+    "search": "Web search and data extraction",
+    "development": "Development tools and utilities",
+    "utilities": "General utility skills",
+    "workflow": "Workflow and automation"
+  },
+  "totals": {
+    "total_skills": 4,
+    "ready": 1,
+    "planned": 3,
+    "installed": 0
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "name": "January's Skills Registry",
+  "version": "0.1.0",
+  "description": "AgentSkills registry for January's Swarm Leader",
+  "skills": [
+    {
+      "id": "tavily-mcp",
+      "name": "Tavily MCP",
+      "description": "Web search via Tavily MCP",
+      "repo": "tavily-mcp",
+      "status": "ready",
+      "category": "search",
+      "author": "January the Swarm Leader",
+      "version": "0.1.0",
+      "last_updated": "2026-03-21"
+    },
+    {
+      "id": "context7",
+      "name": "Context7",
+      "description": "Library documentation injection",
+      "repo": "context7",
+      "status": "planned",
+      "category": "development",
+      "author": "January the Swarm Leader",
+      "version": "0.0.0",
+      "last_updated": null
+    },
+    {
+      "id": "omni-route",
+      "name": "Omni-Route",
+      "description": "Multi-provider API routing",
+      "repo": "omni-route",
+      "status": "planned",
+      "category": "utilities",
+      "author": "January the Swarm Leader",
+      "version": "0.0.0",
+      "last_updated": null
+    },
+    {
+      "id": "task-master",
+      "name": "Task Master",
+      "description": "AI project manager",
+      "repo": "task-master",
+      "status": "planned",
+      "category": "workflow",
+      "author": "January the Swarm Leader",
+      "version": "0.0.0",
+      "last_updated": null
+    }
+  ],
+  "categories": {
+    "search": "Web search and data extraction",
+    "development": "Development tools and utilities",
+    "utilities": "General utility skills",
+    "workflow": "Workflow and automation"
+  },
+  "install_commands": {
+    "tavily-mcp": "git clone https://github.com/your-org/tavily-mcp-skill.git && cd tavily-mcp-skill && ./scripts/install.sh",
+    "install_all": "./scripts/install-deps.sh"
+  },
+  "last_updated": "2026-03-21"
+}

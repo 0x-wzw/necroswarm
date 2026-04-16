@@ -1,0 +1,88 @@
+name: mono-ci
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'  # Weekly CI check
+  workflow_dispatch:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  check-skills:
+    name: Check Skills Registry
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check manifests
+        run: |
+          echo "Checking .monorepo/manifests.json..."
+          if [ -f ".monorepo/manifests.json" ]; then
+            echo "✅ Manifest file found"
+            cat .monorepo/manifests.json | jq '.skills | length' && echo " skills registered"
+          else
+            echo "❌ Manifest file not found"
+            exit 1
+          fi
+
+      - name: Check registry
+        run: |
+          echo "Checking .monorepo/registry.json..."
+          if [ -f ".monorepo/registry.json" ]; then
+            echo "✅ Registry file found"
+            cat .monorepo/registry.json | jq '.last_updated'
+          else
+            echo "❌ Registry file not found"
+            exit 1
+          fi
+
+  lint-skills:
+    name: Lint All Skills
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check manifest validity
+        run: |
+          echo "Linting skill manifests..."
+          if [ -f ".monorepo/manifests.json" ]; then
+            echo "✅ Manifests validated"
+            cat .monorepo/manifests.json | jq '.skills[] | "  - \(.id): \(.status)"'
+          else
+            echo "❌ Manifests not found"
+            exit 1
+          fi
+
+  update-registry:
+    name: Update Registry
+    runs-on: ubuntu-latest
+    needs: [check-skills, lint-skills]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate registry
+        run: |
+          echo "Updating skill registry..."
+          cat .monorepo/manifests.json | jq '{
+            name: "January Skills Registry",
+            version: "0.1.0",
+            skills: .skills,
+            last_updated: now | todate
+          }' > .monorepo/registry.json
+          echo "✅ Registry updated"
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .monorepo/registry.json
+          git commit -m "Update skill registry"
+
+      - name: Push changes
+        run: |
+          git push

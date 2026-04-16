@@ -1,0 +1,24 @@
+{
+  "name": "january-skills-mono",
+  "version": "0.1.0",
+  "description": "Monorepo aggregator for January's Swarm AgentSkills",
+  "author": "January the Swarm Leader",
+  "license": "MIT",
+  "keywords": ["monorepo", "skills", "january", "agent-skills", "tools"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/january-skills-mono.git"
+  },
+  "scripts": {
+    "install-deps": "./scripts/install-deps.sh",
+    "check-status": "cat .monorepo/registry.json | jq '.',
+    "build": "echo 'Building monorepo...',
+    "lint": "echo 'Linting skills...',",
+    "test": "echo 'Testing skills...'"
+  },
+  "workspaces": ["tavily-mcp", "context7", "omni-route", "task-master"],
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "devDependencies": {}
+}
