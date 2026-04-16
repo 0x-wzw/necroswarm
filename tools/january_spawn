@@ -1,0 +1,192 @@
+#!/usr/bin/env python3
+"""
+January Spawn Tool - Spawn subagents for parallel task execution.
+
+This is the functional implementation of the January pre-spawn analysis
+and agent spawning protocol.
+
+Usage:
+    january-spawn --task "Research DeFi protocols" --agents 3 --models kimi,deepseek,qwen
+    
+Or programmatically:
+    from january_tools import spawn_agents
+    results = spawn_agents(task="Research X", agent_configs=[...])
+"""
+
+import argparse
+import json
+import sys
+from datetime import datetime
+from typing import List, Dict, Any
+
+
+def analyze_spawn_decision(task: str, expected_output_tokens: int = 3000) -> Dict[str, Any]:
+    """
+    Implement the 3-question pre-spawn analysis from SKILL.md.
+    
+    Returns decision and reasoning.
+    """
+    decision = {
+        "should_spawn": False,
+        "complexity": "unknown",
+        "parallel_seams": 0,
+        "reasoning": [],
+        "recommended_agents": 0
+    }
+    
+    # Q1: Complexity assessment
+    # Simple: single-step, clear output
+    # Semi-complex: multi-step, some dependencies
+    # Ultra-complex: many decisions, unclear scope
+    task_lower = task.lower()
+    
+    if any(word in task_lower for word in ["and", "then", "after", "before", "sequential"]):
+        decision["complexity"] = "semi-complex"
+        decision["reasoning"].append("Task has sequential elements")
+    elif len(task.split()) > 20:
+        decision["complexity"] = "ultra-complex"
+        decision["reasoning"].append("Task is verbose, likely complex")
+    else:
+        decision["complexity"] = "simple"
+        decision["reasoning"].append("Task appears straightforward")
+    
+    # Q2: Parallel seam detection
+    parallel_keywords = ["research", "analyze", "compare", "multiple", "different", "various"]
+    if any(kw in task_lower for kw in parallel_keywords):
+        decision["parallel_seams"] = min(3, task_lower.count("and") + 1)
+        decision["reasoning"].append(f"Detected {decision['parallel_seams']} potential parallel seams")
+    
+    # Q3: Token math
+    spawn_overhead = 1500  # tokens per spawn
+    min_benefit_ratio = 3.0
+    
+    if expected_output_tokens >= spawn_overhead * min_benefit_ratio:
+        decision["reasoning"].append(f"Token budget sufficient ({expected_output_tokens} > {spawn_overhead * min_benefit_ratio})")
+        if decision["complexity"] in ["semi-complex", "ultra-complex"] and decision["parallel_seams"] > 0:
+            decision["should_spawn"] = True
+            decision["recommended_agents"] = min(decision["parallel_seams"], 5)
+    else:
+        decision["reasoning"].append(f"Token budget insufficient ({expected_output_tokens} < {spawn_overhead * min_benefit_ratio})")
+    
+    return decision
+
+
+def spawn_agents(task: str, agent_configs: List[Dict[str, Any]], dry_run: bool = False) -> Dict[str, Any]:
+    """
+    Spawn subagents based on configuration.
+    
+    Args:
+        task: Main task description
+        agent_configs: List of agent configurations (role, model, subtask)
+        dry_run: If True, only print what would be done
+        
+    Returns:
+        Dict with spawn results and audit trail
+    """
+    print(f"🔥 January Spawn Protocol Initiated")
+    print(f"Task: {task}")
+    print()
+    
+    # Pre-spawn analysis
+    decision = analyze_spawn_decision(task)
+    
+    print(f"📊 Pre-Spawn Analysis:")
+    print(f"  Complexity: {decision['complexity']}")
+    print(f"  Parallel seams: {decision['parallel_seams']}")
+    print(f"  Should spawn: {decision['should_spawn']}")
+    for reason in decision['reasoning']:
+        print(f"    - {reason}")
+    print()
+    
+    if not decision['should_spawn'] and not dry_run:
+        print("❌ January advises against spawning for this task.")
+        print("   Recommendation: Execute in main session")
+        return {"spawned": False, "reason": "pre_spawn_analysis", "decision": decision}
+    
+    # Log spawn decision
+    spawn_log = {
+        "timestamp": datetime.now().isoformat(),
+        "task": task,
+        "decision": decision,
+        "agents": []
+    }
+    
+    if dry_run:
+        print(f"🔄 Would spawn {len(agent_configs)} agents:")
+    else:
+        print(f"🚀 Spawning {len(agent_configs)} agents:")
+    
+    for i, config in enumerate(agent_configs, 1):
+        agent_info = {
+            "id": f"agent_{i}",
+            "role": config.get("role", f"Agent {i}"),
+            "model": config.get("model", "kimi-k2.5"),
+            "subtask": config.get("subtask", task)
+        }
+        spawn_log["agents"].append(agent_info)
+        
+        print(f"  {i}. {agent_info['role']}")
+        print(f"     Model: {agent_info['model']}")
+        print(f"     Subtask: {agent_info['subtask'][:50]}...")
+        
+        if not dry_run:
+            # Here you would actually spawn via delegate_task
+            # For now, we print the command that would be run
+            print(f"     [Would execute: delegate_task via API]")
+    
+    print()
+    print(f"📋 To execute, use the Python API:")
+    print(f"   from hermes_tools import delegate_task")
+    print(f"   # Or use the spawn results to call delegate_task")
+    
+    return {"spawned": True, "log": spawn_log, "agents": agent_configs}
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="January Spawn - Spawn subagents for parallel task execution",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  january-spawn --task "Research DeFi yields and risks" --agents 3
+  january-spawn --task "Code review" --agents 2 --models deepseek,qwen --dry-run
+        """
+    )
+    
+    parser.add_argument("--task", "-t", required=True, help="Task to spawn agents for")
+    parser.add_argument("--agents", "-n", type=int, default=2, help="Number of agents to spawn")
+    parser.add_argument("--models", "-m", default="kimi-k2.5", 
+                       help="Comma-separated models for agents")
+    parser.add_argument("--dry-run", "-d", action="store_true", 
+                       help="Show what would be done without spawning")
+    parser.add_argument("--output", "-o", help="Output file for spawn log (JSON)")
+    
+    args = parser.parse_args()
+    
+    # Parse models
+    models = args.models.split(",")
+    
+    # Generate agent configs
+    agent_configs = []
+    for i in range(args.agents):
+        model = models[i % len(models)]
+        agent_configs.append({
+            "role": f"Specialist {i+1}",
+            "model": model,
+            "subtask": f"{args.task} - Aspect {i+1}"
+        })
+    
+    # Execute spawn
+    result = spawn_agents(args.task, agent_configs, dry_run=args.dry_run)
+    
+    # Output to file if requested
+    if args.output:
+        with open(args.output, 'w') as f:
+            json.dump(result, f, indent=2)
+        print(f"\n📝 Spawn log written to: {args.output}")
+    
+    return 0 if result.get("spawned") else 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -1,0 +1,268 @@
+#!/usr/bin/env python3
+"""
+January Audit Tool - Query and view agent operation audit trail
+
+Implements audit log viewing from SKILL.md memory section:
+- Daily logs: ~/.hermes/memories/daily-logs/YYYY-MM-DD.md
+- Agent comm logs: ~/.hermes/memories/agent-comm-logs/YYYY-MM-DD.jsonl
+
+Usage:
+    january-audit --today              # View today's activity
+    january-audit --date 2026-04-11    # View specific date
+    january-audit --swarm-status       # Show current swarm status
+"""
+
+import argparse
+import json
+import os
+import sys
+from datetime import datetime, timedelta
+from pathlib import Path
+from typing import List, Dict, Any, Optional
+
+
+MEMORY_DIR = Path.home() / ".hermes" / "memories"
+DAILY_LOGS_DIR = MEMORY_DIR / "daily-logs"
+COMM_LOGS_DIR = MEMORY_DIR / "agent-comm-logs"
+SWARM_STATE_DIR = MEMORY_DIR / "swarm-state"
+
+
+def ensure_directories():
+    """Create audit directories if they don't exist."""
+    DAILY_LOGS_DIR.mkdir(parents=True, exist_ok=True)
+    COMM_LOGS_DIR.mkdir(parents=True, exist_ok=True)
+    SWARM_STATE_DIR.mkdir(parents=True, exist_ok=True)
+
+
+def read_daily_log(date: str) -> Optional[str]:
+    """Read daily log for a specific date (YYYY-MM-DD)."""
+    log_file = DAILY_LOGS_DIR / f"{date}.md"
+    if log_file.exists():
+        return log_file.read_text()
+    return None
+
+
+def read_comm_logs(date: str) -> List[Dict[str, Any]]:
+    """Read agent communication logs for a date."""
+    log_file = COMM_LOGS_DIR / f"{date}.jsonl"
+    entries = []
+    if log_file.exists():
+        with open(log_file) as f:
+            for line in f:
+                try:
+                    entries.append(json.loads(line))
+                except json.JSONDecodeError:
+                    continue
+    return entries
+
+
+def get_recent_dates(days: int = 7) -> List[str]:
+    """Get list of recent dates that have logs."""
+    dates = []
+    for i in range(days):
+        date = (datetime.now() - timedelta(days=i)).strftime("%Y-%m-%d")
+        log_file = DAILY_LOGS_DIR / f"{date}.md"
+        if log_file.exists():
+            dates.append(date)
+    return dates
+
+
+def audit_log(entry_type: str, content: str, metadata: Optional[Dict] = None):
+    """
+    Write an entry to the audit log.
+    
+    Can be imported and used by other tools.
+    """
+    ensure_directories()
+    
+    today = datetime.now().strftime("%Y-%m-%d")
+    timestamp = datetime.now().isoformat()
+    
+    # Write to daily log (markdown format)
+    daily_file = DAILY_LOGS_DIR / f"{today}.md"
+    with open(daily_file, 'a') as f:
+        f.write(f"\n## [{timestamp}] {entry_type}\n\n")
+        f.write(f"{content}\n\n")
+        if metadata:
+            f.write(f"```json\n{json.dumps(metadata, indent=2)}\n```\n\n")
+    
+    # Write to JSONL structured log
+    jsonl_file = COMM_LOGS_DIR / f"{today}.jsonl"
+    log_entry = {
+        "timestamp": timestamp,
+        "type": entry_type,
+        "content": content,
+        "metadata": metadata or {}
+    }
+    with open(jsonl_file, 'a') as f:
+        f.write(json.dumps(log_entry) + "\n")
+
+
+def show_today_summary():
+    """Show summary of today's activity."""
+    today = datetime.now().strftime("%Y-%m-%d")
+    daily = read_daily_log(today)
+    comm = read_comm_logs(today)
+    
+    print(f"📋 Daily Summary for {today}")
+    print("=" * 60)
+    
+    if daily:
+        # Count entries (rough estimate by counting headers)
+        entries = daily.count("##")
+        print(f"📝 Activity entries: {entries}")
+        print()
+        print("Recent activity:")
+        lines = daily.split('\n')
+        for line in lines[-20:]:  # Last 20 lines
+            if line.strip():
+                print(f"  {line}")
+    else:
+        print("📝 No activity logged today")
+    
+    print()
+    
+    if comm:
+        print(f"📊 Communication logs: {len(comm)} entries")
+        print("Entry types:")
+        types = {}
+        for entry in comm:
+            t = entry.get('type', 'unknown')
+            types[t] = types.get(t, 0) + 1
+        for t, count in types.items():
+            print(f"  - {t}: {count}")
+    else:
+        print("📊 No communication logs today")
+
+
+def show_date_detail(date: str):
+    """Show detailed view for a specific date."""
+    print(f"📅 Activity for {date}")
+    print("=" * 60)
+    
+    daily = read_daily_log(date)
+    if daily:
+        print(daily)
+    else:
+        print(f"No logs found for {date}")
+    
+    comm = read_comm_logs(date)
+    if comm:
+        print()
+        print("📊 Structured Log Entries:")
+        for entry in comm:
+            print(f"\n[{entry['timestamp']}] {entry['type']}")
+            print(f"  {entry['content'][:100]}...")
+
+
+def show_swarm_status():
+    """Show current swarm status and active agents."""
+    print("🐝 Swarm Status")
+    print("=" * 60)
+    
+    # Get current date stats
+    today = datetime.now().strftime("%Y-%m-%d")
+    comm = read_comm_logs(today)
+    
+    # Parse spawn events
+    spawns = [e for e in comm if e.get('type') == 'spawn']
+    completions = [e for e in comm if e.get('type') == 'completion']
+    
+    print(f"📅 Date: {today}")
+    print(f"🚀 Agents spawned today: {len(spawns)}")
+    print(f"✅ Tasks completed: {len(completions)}")
+    
+    # Estimate active (spawned - completed, minimum 0)
+    active = max(0, len(spawns) - len(completions))
+    print(f"⏳ Estimated active: {active}")
+    
+    print()
+    print("Recent Spawns:")
+    for spawn in spawns[-5:]:  # Last 5
+        ts = spawn['timestamp'].split('T')[1][:8]
+        print(f"  [{ts}] {spawn['content'][:50]}...")
+    
+    print()
+    print("Active Environments:")
+    print(f"  JANUARY_MODE: {os.environ.get('JANUARY_MODE', 'inactive')}")
+    print(f"  JANUARY_DIMENSION: {os.environ.get('JANUARY_DIMENSION', 'N/A')}")
+    print(f"  Memory Directory: {MEMORY_DIR}")
+    print(f"    Exists: {MEMORY_DIR.exists()}")
+    print(f"    Daily logs: {len(list(DAILY_LOGS_DIR.glob('*.md')) if DAILY_LOGS_DIR.exists() else [])} files")
+    print(f"    Comm logs: {len(list(COMM_LOGS_DIR.glob('*.jsonl')) if COMM_LOGS_DIR.exists() else [])} files")
+
+
+def show_recent_summary(days: int = 7):
+    """Show summary for recent days."""
+    print(f"📊 Last {days} Days Summary")
+    print("=" * 60)
+    
+    dates = get_recent_dates(days)
+    if not dates:
+        print("No recent activity found")
+        return
+    
+    for date in dates:
+        daily = read_daily_log(date)
+        comm = read_comm_logs(date)
+        
+        entries = daily.count("##") if daily else 0
+        comm_count = len(comm)
+        
+        print(f"{date}: {entries} entries, {comm_count} comm logs")
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="January Audit - View agent operation audit trail",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  january-audit --today              # Today's activity
+  january-audit --date 2026-04-11    # Specific date
+  january-audit --swarm-status       # Current swarm state
+  january-audit --recent             # Last 7 days
+        """
+    )
+    
+    parser.add_argument("--today", "-t", action="store_true",
+                       help="Show today's audit summary")
+    parser.add_argument("--date", "-d", help="Show specific date (YYYY-MM-DD)")
+    parser.add_argument("--swarm-status", "-s", action="store_true",
+                       help="Show current swarm status")
+    parser.add_argument("--recent", "-r", nargs='?', const=7, type=int,
+                       help="Show last N days summary (default: 7)")
+    parser.add_argument("--write", "-w", nargs=2, metavar=('TYPE', 'CONTENT'),
+                       help="Write an audit entry (type, content)")
+    
+    args = parser.parse_args()
+    
+    # Ensure directories exist
+    ensure_directories()
+    
+    # Default to today if no args
+    if len(sys.argv) == 1:
+        args.today = True
+    
+    if args.write:
+        audit_log(args.write[0], args.write[1])
+        print(f"✅ Audit entry written: {args.write[0]}")
+        return 0
+    
+    if args.today:
+        show_today_summary()
+    elif args.date:
+        show_date_detail(args.date)
+    elif args.swarm_status:
+        show_swarm_status()
+    elif args.recent:
+        show_recent_summary(args.recent)
+    else:
+        parser.print_help()
+        return 1
+    
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

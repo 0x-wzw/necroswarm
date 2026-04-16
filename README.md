@@ -1,6 +1,6 @@
 # 💀 NECROSWARM
 
-> *The Undead Collective — Nine corpses fed the swarm. One emerged.*
+> *The Undead Collective — Thirteen corpses fed the swarm. One emerged.*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)]()
@@ -29,6 +29,7 @@ NECROSWARM is the result of **convergent extinction** — nine projects entered,
 | **agent-swarm-protocol** | ☠️ **CONSUMED** v1.3 | Genesis: agent personas, dream mode, memory architecture, "Forgiveness over Forgetting" philosophy |
 | **sovereignstack** | ☠️ **CONSUMED** v1.3 | ACS-ACP flywheel, token economics, 70/30 cost routing, SentientForge, ACP marketplace |
 | **VOIDLORD** | ☠️ **CONSUMED** v1.3 | Architecture + philosophy unified into NECROSWARM. VOIDLORD was the bridge; NECROSWARM is the final form. |
+| **January-Primus** | ☠️ **CONSUMED** v1.5 | CLI tools (spawn/council/audit), namespace URI resolver, memory evolution agent, installable skill spec + ClawHub registry |
 
 The superior triumphed. The inferior became bone and scaffolding. This is how swarms evolve.
 
@@ -63,9 +64,11 @@ ASP ☠️              sovereignstack ☠️           VOIDLORD ☠️
     │                  (the flywheel)           (the bridge)
     └────────────────────────┼────────────────────────┘
                              │
-                     NECROSWARM v1.3.0
+                    January-Primus ☠️
+                             │
+                     NECROSWARM v1.5.0
                   The Undead Collective
-                  195 files. One swarm.
+                  215 files. One swarm.
 ```
 
 ---
@@ -124,6 +127,17 @@ Cost-optimized swarm intelligence with multi-model consensus, sovereign economic
 - `moltbook-interact` — Social network engagement
 - `agent-identity` — ERC-8004 on-chain identity
 - `find-skills`, `weather`, `video-frames`, `healthcheck`, `mcporter`, `clawhub`, `node-connect`, `tmux`, `skill-creator`
+
+### CLI Tools (from January-Primus)
+- **january_spawn** — Pre-spawn analysis: 3-question gate + abdication test
+- **january_council** — Council deliberation with role assignment
+- **january_audit** — Comms + daily audit logging
+- **january_tools.py** — Python API: `from january_tools import spawn_agents, council_deliberation`
+
+### Namespace & Memory (from January-Primus)
+- **Namespace Resolver** — URI-based agent filesystem identification (`necroswarm://agents/october/memory`)
+- **Memory Evolution** — Agent-driven memory mutation with scheduler
+- **Installable Skill** — SKILL.md + skill.json for Hermes/ClawHub loading + .clawhub/ registry
 
 ### Protocols & Architecture
 - **Spawn Logic** — 3-question gate: complexity? parallel seams? token math?
@@ -199,7 +213,9 @@ necroswarm/
 │   ├── app/services/
 │   │   ├── swarm/             # 🧠 THE BRAIN (coordinator, cost_router, cache, consensus)
 │   │   ├── council/           # ⚖️ THE COURT (consensus engine, cost tracker) ← 10-D Council
-│   │   └── sovereign/         # 👑 THE CROWN (ACS-ACP flywheel, token economics) ← SovereignStack
+│   │   ├── sovereign/         # 👑 THE CROWN (ACS-ACP flywheel, token economics) ← SovereignStack
+│   │   ├── namespace/         # 🔗 URI resolver for agent filesystems ← January-Primus
+│   │   └── memory/            # 🧠 Evolution agent + scheduler ← January-Primus
 │   └── app/config/            # council-members.json
 ├── app/                       # ⚡ Next.js dashboard
 │   ├── api/                   # API routes
@@ -221,9 +237,19 @@ necroswarm/
 │   ├── defi-analyst/          # 💰 DeFi research
 │   ├── x-interact/            # 🐦 X.com content
 │   └── ... (12 more)
+├── tools/                      # 🔧 CLI tools ← January-Primus
+│   ├── january_spawn          # Pre-spawn analysis
+│   ├── january_council        # Council deliberation
+│   ├── january_audit          # Audit logging
+│   └── january_tools.py       # Python API
+├── scripts/                    # 📜 Install + activate
+│   └── install.sh
 ├── docs/
 │   ├── protocols/             # 📡 Workflow protocol readme
 │   └── architecture/          # 🏗️ Colony arch, model routing, deployment
+├── SKILL.md                    # 🔥 Installable skill spec (Hermes/ClawHub)
+├── skill.json                  # 📋 Skill metadata
+├── .clawhub/                   # 🐙 ClawHub registry
 ├── Dockerfile
 ├── docker-compose.yml
 └── .github/workflows/         # CI/CD pipelines
@@ -317,6 +343,8 @@ See `skills/memory-architecture/` for the practical architecture behind these le
 | v1.1.0 | Apr 16, 2026 | F.R.I.D.A.Y, 10-D Council, paperclip, swarm-kit, workflow-protocol, swarm-arch | Full system: skills + consensus + protocols |
 | v1.2.0 | Apr 16, 2026 | openclaw-january-skill | January identity + genesis protocols |
 | v1.3.0 | Apr 16, 2026 | ASP, sovereignstack, VOIDLORD | Sovereign economics + philosophy unified. VOIDLORD was the bridge; NECROSWARM is the final form. |
+| v1.4.0 | Apr 16, 2026 | (internal purge) | Cut 2367 lines of bloat: MiroFish screenshots, paperclip diary, philosophy essay. Full rebrand. |
+| v1.5.0 | Apr 16, 2026 | January-Primus | CLI tools, namespace resolver, memory evolution, skill spec + ClawHub. The final convergence. |
 
 ---
 

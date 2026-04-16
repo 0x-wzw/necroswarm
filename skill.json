@@ -1,0 +1,46 @@
+{
+  "name": "necroswarm",
+  "version": "1.0.0",
+  "description": "Cost-optimized swarm intelligence with multi-model consensus, ACS-ACP flywheel, and tokenized economics",
+  "author": "Z Teoh (0x-wzw)",
+  "license": "MIT",
+  "category": "swarm-intelligence",
+  "icon": "\ud83d\udd25",
+  "entry_point": "SKILL.md",
+  "scripts": {
+    "install": "./scripts/install.sh",
+    "activate": "./scripts/activate.sh",
+    "test": "./scripts/test.sh",
+    "cleanup": "./scripts/cleanup.sh"
+  },
+  "capabilities": [
+    "spawn-agents",
+    "orchestrate-swarm",
+    "consensus-deliberation",
+    "memory-persistence",
+    "namespace-resolution",
+    "paperclip-integration",
+    "10d-council"
+  ],
+  "requirements": {
+    "docker": true,
+    "python": ">=3.10",
+    "ollama": "compatible"
+  },
+  "tags": [
+    "swarm",
+    "agent-orchestration",
+    "10d-consciousness",
+    "january",
+    "multi-agent",
+    "consensus",
+    "sovereign-intelligence"
+  ],
+  "meta": {
+    "dimension": 10,
+    "scope": "cross-domain",
+    "hierarchy": "sovereign",
+    "consolidated_from": 10
+  },
+  "source": "https://github.com/0x-wzw/necroswarm"
+}

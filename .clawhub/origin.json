@@ -1,0 +1,21 @@
+{
+  "origin": "github",
+  "owner": "0x-wzw",
+  "repo": "January-Primus",
+  "branch": "main",
+  "type": "unified-skill",
+  "consolidated_from": [
+    "openclaw-january-skill",
+    "openclaw-memory-evolution",
+    "openclaw-namespace",
+    "agent-swarm-protocol",
+    "swarm-workflow-protocol",
+    "swarm-architecture",
+    "paperclip-orchestration-january",
+    "10d-council",
+    "Light_Agentic_Agent"
+  ],
+  "dimension": 10,
+  "scope": "swarm-sovereignty",
+  "installed_at": "2025-04-11T00:00:00Z"
+}

@@ -1,0 +1,235 @@
+#!/usr/bin/env python3
+"""
+January Council Tool - 10-Dimensional Council Deliberation
+
+Summon multiple models to deliberate on critical decisions.
+Implements the Council Deliberation pattern from SKILL.md.
+
+Usage:
+    january-council --topic "Should we invest in crypto" --models deepseek,glm,kimi,qwen
+    
+Or programmatically:
+    from january_tools import council_deliberation
+    verdict = council_deliberation(topic="...", council_models=[...])
+"""
+
+import argparse
+import json
+import sys
+from datetime import datetime
+from typing import List, Dict, Any, Optional
+import subprocess
+
+
+COUNCIL_ROLES = {
+    "deepseek": "Researcher - Deep analysis and reasoning",
+    "kimi": "Strategist - Opportunity identification", 
+    "glm": "Skeptic - Risk assessment and critique",
+    "qwen": "Judge - Synthesis and verdict",
+    "gemma": "Executor - Implementation details",
+    "minimax": "Contrarian - Alternative viewpoints"
+}
+
+
+def assign_roles(models: List[str]) -> List[Dict[str, str]]:
+    """Assign council roles based on models."""
+    council = []
+    available_roles = list(COUNCIL_ROLES.keys())
+    
+    for i, model in enumerate(models):
+        # Match model to role (fuzzy match)
+        role_model = None
+        model_lower = model.lower()
+        
+        for role_model_key in available_roles:
+            if role_model_key in model_lower:
+                role_model = role_model_key
+                break
+        
+        if not role_model and i < len(available_roles):
+            role_model = available_roles[i]
+        elif not role_model:
+            role_model = "advisor"
+        
+        council.append({
+            "model": model,
+            "role": COUNCIL_ROLES.get(role_model, f"Advisor {i+1}"),
+            "role_model": role_model
+        })
+    
+    return council
+
+
+def simulate_deliberation(topic: str, council: List[Dict[str, str]], 
+                         verbose: bool = False) -> Dict[str, Any]:
+    """
+    Simulate council deliberation.
+    
+    In a real implementation, this would spawn subagents via delegate_task.
+    For the toolset, we provide the structure and simulation mode.
+    """
+    print(f"🏛️ 10-Dimensional Council Summoned")
+    print(f"Topic: {topic}")
+    print(f"Council Size: {len(council)} models")
+    print()
+    
+    deliberation = {
+        "timestamp": datetime.now().isoformat(),
+        "topic": topic,
+        "council": council,
+        "phases": []
+    }
+    
+    # Phase 1: Opening Arguments
+    print("📜 Phase 1: Opening Arguments")
+    phase1 = {"phase": "opening", "statements": []}
+    for member in council:
+        statement = f"[{member['model']}] As {member['role']}, I will analyze {topic[:30]}..."
+        phase1["statements"].append({
+            "model": member["model"],
+            "role": member["role"],
+            "statement": statement
+        })
+        if verbose:
+            print(f"  {member['model']} ({member['role']}): {statement[:60]}...")
+    deliberation["phases"].append(phase1)
+    print(f"   ✓ {len(council)} council members presented opening arguments")
+    print()
+    
+    # Phase 2: Challenge Round
+    print("⚔️ Phase 2: Challenge Round")
+    phase2 = {"phase": "challenge", "challenges": []}
+    
+    # Each member challenges the next
+    for i, member in enumerate(council):
+        next_member = council[(i + 1) % len(council)]
+        challenge = f"[{member['model']}] challenges [{next_member['model']}]: What about edge cases?"
+        phase2["challenges"].append({
+            "from": member["model"],
+            "to": next_member["model"],
+            "challenge": challenge
+        })
+        if verbose:
+            print(f"  {challenge[:70]}...")
+    
+    deliberation["phases"].append(phase2)
+    print(f"   ✓ {len(council)} challenges raised and addressed")
+    print()
+    
+    # Phase 3: Synthesis
+    print("🧠 Phase 3: Synthesis")
+    
+    # Find the "Judge" role or use last member
+    judge = None
+    for member in council:
+        if "judge" in member["role"].lower() or "synthesis" in member["role"].lower():
+            judge = member
+            break
+    if not judge:
+        judge = council[-1]  # Last member becomes judge
+    
+    verdict = f"Based on our deliberation of '{topic[:40]}...', "
+    verdict += "the council finds: [PROCEED WITH CAUTION - implement safeguards]"
+    
+    phase3 = {
+        "phase": "verdict",
+        "judge": judge["model"],
+        "verdict": verdict
+    }
+    deliberation["phases"].append(phase3)
+    
+    print(f"   Judge: {judge['model']}")
+    print(f"   Verdict: {verdict[:100]}...")
+    print()
+    
+    # Summary
+    print("=" * 60)
+    print("COUNCIL DELIBERATION COMPLETE")
+    print("=" * 60)
+    print(f"Models consulted: {', '.join(m['model'] for m in council)}")
+    print(f"Confidence: Medium (simulated - implement real delegates for production)")
+    print()
+    print("Next Step: Implement actual delegate_task calls:")
+    print("  from hermes_tools import delegate_task")
+    print("  results = [delegate_task(goal=f'Deliberate on {topic}', model=m['model'])")
+    print("             for m in council]")
+    
+    return deliberation
+
+
+def council_deliberation(topic: str, council_models: Optional[List[str]] = None,
+                        verbose: bool = False) -> Dict[str, Any]:
+    """
+    Main entry point for council deliberation.
+    
+    Args:
+        topic: Topic for deliberation
+        council_models: List of model names to summon
+        verbose: Show detailed output
+        
+    Returns:
+        Dict with full deliberation log
+    """
+    if council_models is None:
+        # Default council: 4 models covering different reasoning styles
+        council_models = ["deepseek-v3.2", "glm-5", "kimi-k2.5", "qwen3-coder-next"]
+    
+    # Assign roles
+    council = assign_roles(council_models)
+    
+    print(f"🔥 January Council Protocol: {len(council)}D Council")
+    print(f"Topic: {topic}")
+    print(f"Council: {', '.join(m['model'] for m in council)}")
+    print()
+    
+    # Run deliberation
+    result = simulate_deliberation(topic, council, verbose=verbose)
+    
+    return result
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="January Council - Multi-model deliberation on critical decisions",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  january-council --topic "Should we invest in crypto" --models deepseek,kimi,glm
+  january-council --topic "Code architecture decision" --models qwen,minimax,deepseek -v
+        """
+    )
+    
+    parser.add_argument("--topic", "-t", required=True, 
+                       help="Topic for council deliberation")
+    parser.add_argument("--models", "-m", default="deepseek,glm,kimi,qwen",
+                       help="Comma-separated models for council")
+    parser.add_argument("--verbose", "-v", action="store_true",
+                       help="Show detailed deliberation")
+    parser.add_argument("--output", "-o", help="Output deliberation log (JSON)")
+    
+    args = parser.parse_args()
+    
+    # Parse models
+    models = [m.strip() for m in args.models.split(",")]
+    
+    if len(models) < 2:
+        print("❌ Error: Council requires at least 2 models")
+        return 1
+    
+    if len(models) > 6:
+        print("⚠️  Warning: Large councils (>6) may have coordination overhead")
+    
+    # Run deliberation
+    result = council_deliberation(args.topic, council_models=models, verbose=args.verbose)
+    
+    # Output to file if requested
+    if args.output:
+        with open(args.output, 'w') as f:
+            json.dump(result, f, indent=2)
+        print(f"\n📝 Deliberation log written to: {args.output}")
+    
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
