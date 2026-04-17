@@ -128,11 +128,11 @@ REPORT_TO: Hermes
 
 | Pattern | Skill | Description |
 |---|---|---|
-| **RESOLVER** | `resolver` | Intent→skill dispatch table. Load before every task. |
-| **Signal Detection** | `signal-detection` | Always-on entity extraction on every message. |
-| **Refusal Routing** | `refusal-routing` | Per-task model fallback chain within council. |
-| **Brain-First** | `brain-first` | Check memory before external API calls. |
-| **Hybrid Search** | `hybrid-search` | RRF fusion for knowledge retrieval (architecture spec). |
+| **RESOLVER** | `agent-orchestration/resolver` | Intent→skill dispatch table. Load before every task. |
+| **Signal Detection** | `agent-orchestration/signal-detection` | Always-on entity extraction on every message. |
+| **Refusal Routing** | `agent-orchestration/refusal-routing` | Per-task model fallback chain within council. |
+| **Brain-First** | `agent-orchestration/brain-first` | Check memory before external API calls. |
+| **Hybrid Search** | `agent-orchestration/hybrid-search` | RRF fusion for knowledge retrieval (architecture spec). |
 
 ### NOT Adopted (We're a Swarm, Not a Brain)
 - **Flat dispatch** — We have council deliberation, not a flat lookup table

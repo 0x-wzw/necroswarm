@@ -239,7 +239,13 @@ necroswarm/
 │   ├── mcp/                   # MCP integration
 │   ├── runtime/               # Orchestrator, validators, auditors
 │   └── schemas/               # JSON schemas
-├── skills/                    # 🛠️ PRODUCTION SKILLS (19 total)
+├── skills/                    # 🛠️ PRODUCTION SKILLS (24 total)
+│   ├── necroswarm/            # ☠️ Core swarm intelligence (SKILL.md)
+│   ├── resolver/              # ⚫ RESOLVER — intent→skill dispatch (resolve.py)
+│   ├── signal-detection/      # 👁️ Always-on entity extraction (detect.py)
+│   ├── refusal-routing/       # ⛓️ Model fallback chains (refusal_route.py)
+│   ├── brain-first/           # 🧠 Memory cache check (brain_check.py)
+│   ├── hybrid-search/         # 🔍 RRF architecture spec (future)
 │   ├── january/               # 🌌 January the Swarm Leader
 │   ├── dream-mode/            # 💭 Session composting
 │   ├── consensus/             # ⚖️ Voting protocol
@@ -356,6 +362,39 @@ See `skills/memory-architecture/` for the practical architecture behind these le
 | v1.3.0 | Apr 16, 2026 | ASP, sovereignstack, VOIDLORD | Sovereign economics + philosophy unified. VOIDLORD was the bridge; NECROSWARM is the final form. |
 | v1.4.0 | Apr 16, 2026 | (internal purge) | Cut 2367 lines of bloat: MiroFish screenshots, paperclip diary, philosophy essay. Full rebrand. |
 | v1.5.0 | Apr 16, 2026 | January-Primus | CLI tools, namespace resolver, memory evolution, skill spec + ClawHub. The final convergence. |
+| v1.5.2 | Apr 17, 2026 | — | Active pattern skills: RESOLVER, Signal Detection, Refusal Routing, Brain-First, Hybrid Search. Passive → Active transformation. |
+
+---
+
+## 🧠 Active Pattern Skills (v1.5.2)
+
+NecroSwarm v1.5.2 introduces **executable pattern skills** — each backed by a Python script that can be run directly or integrated programmatically. These are the cognitive patterns that make the swarm smart, not just powerful.
+
+| Skill | Script | What It Does |
+|---|---|---|
+| **⚫ RESOLVER** | `skills/resolver/scripts/resolve.py` | Intent→skill dispatch engine. 35+ patterns, complexity routing, council fallback. |
+| **👁️ Signal Detection** | `skills/signal-detection/scripts/detect.py` | Always-on entity extraction from every message. Classifies HIGH/MEDIUM/LOW priority. |
+| **⛓️ Refusal Routing** | `skills/refusal-routing/scripts/refusal_route.py` | Per-task model fallback chains. 6 chains by task type + 10 dimension-aware NecroSwarm routes. |
+| **🧠 Brain-First** | `skills/brain-first/scripts/brain_check.py` | Check memory before external API calls. Exit 0 if found, Exit 1 if need web_search. |
+| **🔍 Hybrid Search** | *Architecture spec only* | RRF fusion design for future knowledge store. Not yet implemented (YAGNI). |
+
+### Usage
+
+```bash
+# Resolve an intent to matching skills
+python skills/resolver/scripts/resolve.py "debug the login error"
+
+# Detect signals in a message (JSON output)
+python skills/signal-detection/scripts/detect.py --json "I prefer autonomous execution"
+
+# Get next model in fallback chain
+python skills/refusal-routing/scripts/refusal_route.py --task complex --model "kimi-k2.5:cloud" --error refusal
+
+# Check memory before web search
+python skills/brain-first/scripts/brain_check.py "voidtether github url"
+```
+
+All scripts return JSON with `--json` flag and proper exit codes (0=found/success, 1=not found/exhausted).
 
 ---
 
